@@ -1,0 +1,7 @@
+userinterface.RegistrationPage.PatientRegistrationForm$6
+userinterface.RegistrationPage.PatientRegistrationForm$4
+userinterface.RegistrationPage.PatientRegistrationForm$5
+userinterface.RegistrationPage.PatientRegistrationForm
+userinterface.RegistrationPage.PatientRegistrationForm$2
+userinterface.RegistrationPage.PatientRegistrationForm$3
+userinterface.RegistrationPage.PatientRegistrationForm$1
