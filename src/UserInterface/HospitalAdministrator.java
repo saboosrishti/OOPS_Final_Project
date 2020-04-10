@@ -45,6 +45,8 @@ public class HospitalAdministrator extends javax.swing.JPanel {
         registerPatient = new javax.swing.JButton();
         viewPatients = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 153, 153));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("             Hospital Administrator");
 
@@ -103,11 +105,18 @@ public class HospitalAdministrator extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerDoctorActionPerformed
-
+        DoctorRegistrationForm doctorRegistration = new DoctorRegistrationForm();
+        container.add("DoctorRegistrationForm", doctorRegistration);
+        CardLayout cardLayout = (CardLayout) container.getLayout();
+        cardLayout.next(container);
     }//GEN-LAST:event_registerDoctorActionPerformed
 
     private void registerPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPatientActionPerformed
-
+        System.out.println("UserInterface.HospitalAdministrator.registerPatientActionPerformed()");
+        PatientRegistrationForm registerPatientForm = new PatientRegistrationForm();
+        container.add("PatientRegistrationForm", registerPatientForm);
+        CardLayout cardLayout = (CardLayout) container.getLayout();
+        cardLayout.next(container);
     }//GEN-LAST:event_registerPatientActionPerformed
 
     private void viewPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPatientsActionPerformed

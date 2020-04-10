@@ -6,8 +6,22 @@ package UserInterface;
  * and open the template in the editor.
  */
 import java.awt.CardLayout;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -21,12 +35,12 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
      */
 
     public PatientRegistrationForm() {
-
-    }
-
-    public PatientRegistrationForm(JPanel userProcessContainer) {
         initComponents();
     }
+
+//    public PatientRegistrationForm(JPanel userProcessContainer) {
+//        initComponents();
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,30 +57,30 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         customerEmailTextField = new javax.swing.JTextField();
-        customerNameTextField = new javax.swing.JTextField();
+        patientFname = new javax.swing.JTextField();
         registerCustomerjButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         customerPhoneTextField = new javax.swing.JTextField();
         backjButton = new javax.swing.JButton();
-        customerNameTextField1 = new javax.swing.JTextField();
+        patientLName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        customerEmailTextField1 = new javax.swing.JTextField();
+        insuranceNo = new javax.swing.JTextField();
         monthComboBox = new javax.swing.JComboBox<>();
         yearComboBox = new javax.swing.JComboBox<>();
         dayComboBox = new javax.swing.JComboBox<>();
         maleRadioButton = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        femaleRadioBtn = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         registerCustomerjButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        customerPhoneTextField1 = new javax.swing.JTextField();
+        deptName = new javax.swing.JTextField();
 
         jPasswordField1.setText("jPasswordField1");
 
-        setBackground(new java.awt.Color(204, 204, 204));
+        setBackground(new java.awt.Color(0, 153, 153));
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Patient Registration Form");
@@ -77,9 +91,9 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
 
         jLabel3.setText("DoB:");
 
-        customerNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        patientFname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerNameTextFieldActionPerformed(evt);
+                patientFnameActionPerformed(evt);
             }
         });
 
@@ -94,6 +108,12 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
 
         jLabel5.setText("Phone No:");
 
+        customerPhoneTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerPhoneTextFieldActionPerformed(evt);
+            }
+        });
+
         backjButton.setText("<<Back");
         backjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,9 +121,9 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
             }
         });
 
-        customerNameTextField1.addActionListener(new java.awt.event.ActionListener() {
+        patientLName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerNameTextField1ActionPerformed(evt);
+                patientLNameActionPerformed(evt);
             }
         });
 
@@ -149,7 +169,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(customerPhoneTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(deptName, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -170,7 +190,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2)
+                                .addComponent(femaleRadioBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel9))
                             .addGroup(layout.createSequentialGroup()
@@ -180,13 +200,13 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel7))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(customerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(patientFname, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel6)))
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(customerNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(customerEmailTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(patientLName, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(insuranceNo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,37 +230,40 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
                     .addComponent(enterpriseLabel)
                     .addComponent(backjButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(customerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(customerNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(patientLName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(patientFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(customerEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
-                        .addComponent(customerEmailTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(insuranceNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(maleRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8))
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(maleRadioButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addComponent(femaleRadioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(customerPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addComponent(customerPhoneTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(deptName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(customerPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registerCustomerjButton)
@@ -249,9 +272,9 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void customerNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerNameTextFieldActionPerformed
+    private void patientFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientFnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customerNameTextFieldActionPerformed
+    }//GEN-LAST:event_patientFnameActionPerformed
     private boolean usernamePatternCorrect(String username){
         Pattern p = Pattern.compile("^[a-zA-Z0-9]+_[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
         Matcher m = p.matcher(username);
@@ -266,18 +289,77 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         return b;
     
     }
+    
+     public void clearFields() {
+        patientFname.setText("");
+        patientLName.setText("");
+        maleRadioButton.setSelected(true);
+        femaleRadioBtn.setSelected(false);
+        customerEmailTextField.setText("");
+        customerPhoneTextField.setText("");
+        deptName.setText("");
+    }
+     
     private void registerCustomerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCustomerjButtonActionPerformed
-
-
+        
+        if(patientFname.getText().equals("") || patientLName.getText().equals("") || customerEmailTextField.getText().equals("") || insuranceNo.getText().equals("") || customerPhoneTextField.getText().equals("") || deptName.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "All fields are required!");
+            return;
+        }
+        
+        Set<String> emailSet = new HashSet<>();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader("src/assests/patientRecord.csv"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] cols = line.split(",");
+                emailSet.add(cols[2]);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        String patientFName = this.patientFname.getText();
+        String patientLName = this.patientLName.getText();
+        String email = customerEmailTextField.getText();
+        if(emailSet.contains(email)) {
+            JOptionPane.showMessageDialog(null,"Patient with "+email+" already exist");
+            return;
+        }
+        String insurance = insuranceNo.getText();
+        String phone = customerPhoneTextField.getText();
+        String department = deptName.getText();
+        String gender="";
+        if(maleRadioButton.isSelected()) gender="M";
+        else if(femaleRadioBtn.isSelected()) gender="F";
+        String dob = (String)monthComboBox.getSelectedItem()+"/"+(String)dayComboBox.getSelectedItem()+"/"+(String)yearComboBox.getSelectedItem();
+        
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream("src/assests/patientRecord.csv",true);
+            PrintWriter pw = new PrintWriter(fos);
+            pw.append(patientFName+","+patientLName+","+email+","+insurance+","+dob+","+gender+","+phone+","+department);
+            pw.println();
+            pw.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null,"Patient registered successfully.");
+        clearFields();
     }//GEN-LAST:event_registerCustomerjButtonActionPerformed
 
     private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
 
     }//GEN-LAST:event_backjButtonActionPerformed
 
-    private void customerNameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerNameTextField1ActionPerformed
+    private void patientLNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientLNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customerNameTextField1ActionPerformed
+    }//GEN-LAST:event_patientLNameActionPerformed
 
     private void yearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboBoxActionPerformed
         // TODO add your handling code here:
@@ -285,19 +367,23 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
 
     private void registerCustomerjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCustomerjButton1ActionPerformed
         // TODO add your handling code here:
+        clearFields();
     }//GEN-LAST:event_registerCustomerjButton1ActionPerformed
+
+    private void customerPhoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerPhoneTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerPhoneTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backjButton;
     private javax.swing.JTextField customerEmailTextField;
-    private javax.swing.JTextField customerEmailTextField1;
-    private javax.swing.JTextField customerNameTextField;
-    private javax.swing.JTextField customerNameTextField1;
     private javax.swing.JTextField customerPhoneTextField;
-    private javax.swing.JTextField customerPhoneTextField1;
     private javax.swing.JComboBox<String> dayComboBox;
+    private javax.swing.JTextField deptName;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JRadioButton femaleRadioBtn;
+    private javax.swing.JTextField insuranceNo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -309,9 +395,10 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton maleRadioButton;
     private javax.swing.JComboBox<String> monthComboBox;
+    private javax.swing.JTextField patientFname;
+    private javax.swing.JTextField patientLName;
     private javax.swing.JButton registerCustomerjButton;
     private javax.swing.JButton registerCustomerjButton1;
     private javax.swing.JComboBox<String> yearComboBox;

@@ -5,6 +5,14 @@
  */
 package UserInterface;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Name
@@ -16,6 +24,35 @@ public class HospitalPatientList extends javax.swing.JPanel {
      */
     public HospitalPatientList() {
         initComponents();
+        populateData();
+    }
+    
+    public void populateData(){
+        System.out.println("Hey");
+        DefaultTableModel model = (DefaultTableModel) patientJTable.getModel();
+        model.setRowCount(0);
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader("src/assests/patientRecord.csv"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] cols = line.split(",");
+                System.out.println(cols[1]);
+                Object[] row = new Object[7];
+                row[0] = cols[0]+" "+cols[1];
+                row[1] = cols[4];
+                System.out.println(cols[5]);
+                row[2] = cols[5];
+                row[3] ="Admitted";
+                model.addRow(row);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
 
     /**
@@ -27,9 +64,14 @@ public class HospitalPatientList extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jColorChooser1 = new javax.swing.JColorChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         patientJTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+
+        jColorChooser1.setBackground(new java.awt.Color(0, 153, 153));
+
+        setBackground(new java.awt.Color(0, 153, 153));
 
         patientJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,6 +115,7 @@ public class HospitalPatientList extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable patientJTable;
