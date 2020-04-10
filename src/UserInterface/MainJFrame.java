@@ -1,32 +1,38 @@
-package UserInterface;
-
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package UserInterface;
+
 import Business.Employee;
 import Business.EmployeeDirectory;
 import Business.HospitalAdminSingleton;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 /**
  *
- * @author Lingfeng
+ * @author Rajat
  */
 public class MainJFrame extends javax.swing.JFrame {
 
+    /**
+     * Creates new form MainJFrame
+     */
     EmployeeDirectory employeeDirectory;
     Employee hosAdmin;
-
-    public MainJFrame() {
+    
+       public MainJFrame() {
         initComponents();
+        this.setSize(1366, 700);
         this.employeeDirectory = new EmployeeDirectory();
         this.hosAdmin = HospitalAdminSingleton.getInstance();
         this.employeeDirectory.AddEmployeeToDirectory(this.hosAdmin);
+        
+        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,12 +54,9 @@ public class MainJFrame extends javax.swing.JFrame {
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(700, 700));
 
-        jSplitPane1.setDividerLocation(100);
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setPreferredSize(new java.awt.Dimension(300, 294));
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         loginJButton.setText("Login");
         loginJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -62,12 +65,24 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("User Name:");
+        userNameJTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel2.setText("Password:");
+        passwordField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("User Name");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Password");
 
         logoutJButton.setText("Logout");
-        logoutJButton.setEnabled(false);
         logoutJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutJButtonActionPerformed(evt);
@@ -78,54 +93,54 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(loginJLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(361, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(loginJLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(201, Short.MAX_VALUE))
+                            .addComponent(passwordField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(userNameJTextField)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(loginJButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(logoutJButton)))
-                    .addComponent(jLabel2))
-                .addGap(199, 199, 199)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(185, 185, 185)
                 .addComponent(loginJLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(464, Short.MAX_VALUE))
         );
-
-        logoutJButton.getAccessibleContext().setAccessibleDescription("");
 
         jSplitPane1.setLeftComponent(jPanel1);
 
-        container.setBackground(new java.awt.Color(204, 204, 204));
+        container.setBackground(new java.awt.Color(0, 153, 153));
+        container.setMaximumSize(new java.awt.Dimension(700, 700));
         container.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(container);
 
@@ -133,9 +148,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+
+   
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
-        // Get user name
         String userName = userNameJTextField.getText();
         String passWord = passwordField.getText();
         Employee employeeObject = employeeDirectory.ValidateEmployeeLogin(userName, passWord);
@@ -148,11 +168,10 @@ public class MainJFrame extends javax.swing.JFrame {
             CardLayout cardLayout = (CardLayout) container.getLayout();
             cardLayout.next(container);
         }
-
-
     }//GEN-LAST:event_loginJButtonActionPerformed
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed
+        // TODO add your handling code here:
         logoutJButton.setEnabled(false);
         userNameJTextField.setEnabled(true);
         passwordField.setEnabled(true);
@@ -194,6 +213,7 @@ public class MainJFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -202,6 +222,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel container;
     private javax.swing.JLabel jLabel1;
@@ -214,5 +235,4 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField userNameJTextField;
     // End of variables declaration//GEN-END:variables
-
 }
