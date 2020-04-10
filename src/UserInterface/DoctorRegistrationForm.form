@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="99" green="99" red="0" type="rgb"/>
+    </Property>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -26,26 +31,26 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="customerEmailTextField" min="-2" pref="91" max="-2" attributes="0"/>
+                      <Component id="doctorEmail" min="-2" pref="91" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="customerNameTextField" min="-2" pref="91" max="-2" attributes="0"/>
+                      <Component id="doctorFName" min="-2" pref="91" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="customerEmailTextField1" min="-2" pref="91" max="-2" attributes="0"/>
+                      <Component id="doctorPassword" min="-2" pref="91" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="customerPhoneTextField" min="-2" pref="91" max="-2" attributes="0"/>
+                  <Component id="doctorPhone" min="-2" pref="91" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="customerNameTextField1" pref="91" max="32767" attributes="0"/>
+                      <Component id="doctorLName" pref="91" max="32767" attributes="0"/>
                       <Component id="doctorsDepartment" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -58,7 +63,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
-              <Component id="registerCustomerjButton" min="-2" max="-2" attributes="0"/>
+              <Component id="registerDoctorButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="registerCustomerjButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -77,10 +82,10 @@
               <Component id="enterpriseLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="customerNameTextField1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="doctorLName" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="customerNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="doctorFName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -88,7 +93,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="customerEmailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="doctorEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="doctorsDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -97,12 +102,12 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="customerPhoneTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="customerEmailTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="doctorPhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="doctorPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="registerCustomerjButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="registerDoctorButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="registerCustomerjButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -118,7 +123,7 @@
         <Property name="text" type="java.lang.String" value="Phone No:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="customerPhoneTextField">
+    <Component class="javax.swing.JTextField" name="doctorPhone">
     </Component>
     <Component class="javax.swing.JButton" name="backjButton">
       <Properties>
@@ -159,24 +164,24 @@
         <Property name="text" type="java.lang.String" value="Password:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="customerEmailTextField">
+    <Component class="javax.swing.JTextField" name="doctorEmail">
     </Component>
-    <Component class="javax.swing.JTextField" name="customerNameTextField">
+    <Component class="javax.swing.JTextField" name="doctorFName">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customerNameTextFieldActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorFNameActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="registerCustomerjButton">
+    <Component class="javax.swing.JButton" name="registerDoctorButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Register"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerCustomerjButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerDoctorButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="customerNameTextField1">
+    <Component class="javax.swing.JTextField" name="doctorLName">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customerNameTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorLNameActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -204,7 +209,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="customerEmailTextField1">
+    <Component class="javax.swing.JTextField" name="doctorPassword">
     </Component>
   </SubComponents>
 </Form>

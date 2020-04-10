@@ -80,7 +80,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
 
         jPasswordField1.setText("jPasswordField1");
 
-        setBackground(new java.awt.Color(204, 204, 204));
+        setBackground(new java.awt.Color(0, 153, 153));
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Patient Registration Form");

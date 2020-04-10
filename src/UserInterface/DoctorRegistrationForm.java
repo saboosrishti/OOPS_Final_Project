@@ -1,5 +1,17 @@
 package UserInterface;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,21 +41,23 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        customerPhoneTextField = new javax.swing.JTextField();
+        doctorPhone = new javax.swing.JTextField();
         backjButton = new javax.swing.JButton();
         registerCustomerjButton1 = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        customerEmailTextField = new javax.swing.JTextField();
-        customerNameTextField = new javax.swing.JTextField();
-        registerCustomerjButton = new javax.swing.JButton();
-        customerNameTextField1 = new javax.swing.JTextField();
+        doctorEmail = new javax.swing.JTextField();
+        doctorFName = new javax.swing.JTextField();
+        registerDoctorButton = new javax.swing.JButton();
+        doctorLName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         doctorsDepartment = new javax.swing.JComboBox<>();
-        customerEmailTextField1 = new javax.swing.JTextField();
+        doctorPassword = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel5.setText("Phone No:");
 
@@ -70,22 +84,22 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
 
         jLabel3.setText("Password:");
 
-        customerNameTextField.addActionListener(new java.awt.event.ActionListener() {
+        doctorFName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerNameTextFieldActionPerformed(evt);
+                doctorFNameActionPerformed(evt);
             }
         });
 
-        registerCustomerjButton.setText("Register");
-        registerCustomerjButton.addActionListener(new java.awt.event.ActionListener() {
+        registerDoctorButton.setText("Register");
+        registerDoctorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerCustomerjButtonActionPerformed(evt);
+                registerDoctorButtonActionPerformed(evt);
             }
         });
 
-        customerNameTextField1.addActionListener(new java.awt.event.ActionListener() {
+        doctorLName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerNameTextField1ActionPerformed(evt);
+                doctorLNameActionPerformed(evt);
             }
         });
 
@@ -108,22 +122,22 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(customerEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(doctorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(customerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(doctorFName, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(customerEmailTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(customerPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(customerNameTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                        .addComponent(doctorLName, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                         .addComponent(doctorsDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(44, 237, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -132,7 +146,7 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
                 .addGap(0, 304, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(232, 232, 232)
-                .addComponent(registerCustomerjButton)
+                .addComponent(registerDoctorButton)
                 .addGap(18, 18, 18)
                 .addComponent(registerCustomerjButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -148,27 +162,27 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
                 .addComponent(enterpriseLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(customerNameTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorLName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(customerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(doctorFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(customerEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(doctorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
                         .addComponent(doctorsDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
-                    .addComponent(customerPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerEmailTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(doctorPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registerCustomerjButton)
+                    .addComponent(registerDoctorButton)
                     .addComponent(registerCustomerjButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(backjButton)
@@ -184,26 +198,69 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_registerCustomerjButton1ActionPerformed
 
-    private void customerNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerNameTextFieldActionPerformed
+    private void doctorFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorFNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customerNameTextFieldActionPerformed
+    }//GEN-LAST:event_doctorFNameActionPerformed
 
-    private void registerCustomerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCustomerjButtonActionPerformed
+    private void registerDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerDoctorButtonActionPerformed
+        
+        Set<String> emailSet = new HashSet<>();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader("src/assests/doctorRecord.csv"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] cols = line.split(",");
+                emailSet.add(cols[2]);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String doctorFName = this.doctorFName.getText();
+        String doctorLName = this.doctorLName.getText();
+        String doctorEmail = this.doctorEmail.getText();
+         if(emailSet.contains(doctorEmail)) {
+            JOptionPane.showMessageDialog(null,"Patient with "+doctorEmail+" already exist");
+            return;
+        }
+        String doctorPassword = this.doctorPassword.getText();
+        String doctorPhone = this.doctorPhone.getText();
+        String doctorDept = (String)this.doctorsDepartment.getSelectedItem();
+        
+         if(doctorFName.equals("") || doctorLName.equals("") || doctorEmail.equals("") || doctorPassword.equals("") || doctorPhone.equals("")) {
+            JOptionPane.showMessageDialog(null, "All fields are required!");
+            return;
+        }
+              
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream("src/assests/doctorRecord.csv",true);
+            PrintWriter pw = new PrintWriter(fos);
+            pw.append(doctorFName+","+doctorLName+","+doctorEmail+","+doctorPassword+","+doctorPhone+","+doctorDept);
+            pw.println();
+            pw.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null,"Patient registered successfully.");    
+    }//GEN-LAST:event_registerDoctorButtonActionPerformed
 
-    }//GEN-LAST:event_registerCustomerjButtonActionPerformed
-
-    private void customerNameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerNameTextField1ActionPerformed
+    private void doctorLNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorLNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_customerNameTextField1ActionPerformed
+    }//GEN-LAST:event_doctorLNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backjButton;
-    private javax.swing.JTextField customerEmailTextField;
-    private javax.swing.JTextField customerEmailTextField1;
-    private javax.swing.JTextField customerNameTextField;
-    private javax.swing.JTextField customerNameTextField1;
-    private javax.swing.JTextField customerPhoneTextField;
+    private javax.swing.JTextField doctorEmail;
+    private javax.swing.JTextField doctorFName;
+    private javax.swing.JTextField doctorLName;
+    private javax.swing.JTextField doctorPassword;
+    private javax.swing.JTextField doctorPhone;
     private javax.swing.JComboBox<String> doctorsDepartment;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
@@ -212,7 +269,7 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JButton registerCustomerjButton;
     private javax.swing.JButton registerCustomerjButton1;
+    private javax.swing.JButton registerDoctorButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -64,9 +64,14 @@ public class HospitalPatientList extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jColorChooser1 = new javax.swing.JColorChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         patientJTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+
+        jColorChooser1.setBackground(new java.awt.Color(0, 153, 153));
+
+        setBackground(new java.awt.Color(0, 153, 153));
 
         patientJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,6 +115,7 @@ public class HospitalPatientList extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable patientJTable;
