@@ -105,7 +105,7 @@ public class HospitalAdministrator extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerDoctorActionPerformed
-        DoctorRegistrationForm doctorRegistration = new DoctorRegistrationForm();
+        DoctorRegistrationForm doctorRegistration = new DoctorRegistrationForm(container);
         container.add("DoctorRegistrationForm", doctorRegistration);
         CardLayout cardLayout = (CardLayout) container.getLayout();
         cardLayout.next(container);
@@ -113,14 +113,14 @@ public class HospitalAdministrator extends javax.swing.JPanel {
 
     private void registerPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPatientActionPerformed
         System.out.println("UserInterface.HospitalAdministrator.registerPatientActionPerformed()");
-        PatientRegistrationForm registerPatientForm = new PatientRegistrationForm();
+        PatientRegistrationForm registerPatientForm = new PatientRegistrationForm(container);
         container.add("PatientRegistrationForm", registerPatientForm);
         CardLayout cardLayout = (CardLayout) container.getLayout();
         cardLayout.next(container);
     }//GEN-LAST:event_registerPatientActionPerformed
 
     private void viewPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPatientsActionPerformed
-        HospitalPatientList hospitalPatientList = new HospitalPatientList();
+        HospitalPatientList hospitalPatientList = new HospitalPatientList(container);
         container.add("HospitalPatientList", hospitalPatientList);
         CardLayout cardLayout = (CardLayout) container.getLayout();
         cardLayout.next(container);
