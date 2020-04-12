@@ -1,5 +1,6 @@
 package UserInterface;
 
+import java.awt.CardLayout;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,6 +12,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,8 +29,10 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
     /**
      * Creates new form DoctorRegistrationForm
      */
-    public DoctorRegistrationForm() {
+    private JPanel container;
+    public DoctorRegistrationForm(JPanel container) {
         initComponents();
+         this.container=container;
     }
 
     /**
@@ -76,7 +80,7 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Employee Registration Form");
+        enterpriseLabel.setText("Doctor Registration Form");
 
         jLabel1.setText("First Name:");
 
@@ -143,11 +147,11 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(197, 197, 197)
                 .addComponent(enterpriseLabel)
-                .addGap(0, 304, Short.MAX_VALUE))
+                .addGap(0, 330, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(232, 232, 232)
+                .addGap(288, 288, 288)
                 .addComponent(registerDoctorButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(registerCustomerjButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -192,6 +196,9 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
 
     private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
 
+        container.remove(this);    
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
     }//GEN-LAST:event_backjButtonActionPerformed
 
     private void registerCustomerjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCustomerjButton1ActionPerformed
