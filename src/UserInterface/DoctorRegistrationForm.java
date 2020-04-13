@@ -217,6 +217,7 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
             br = new BufferedReader(new FileReader("src/assests/doctorRecord.csv"));
             String line;
             while ((line = br.readLine()) != null) {
+                System.out.println(line);
                 // use comma as separator
                 String[] cols = line.split(",");
                 emailSet.add(cols[2]);
