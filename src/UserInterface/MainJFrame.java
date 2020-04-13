@@ -9,6 +9,8 @@ import Business.Employee;
 import Business.EmployeeDirectory;
 import Business.HospitalAdminSingleton;
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /**
@@ -29,6 +31,17 @@ public class MainJFrame extends javax.swing.JFrame {
         this.employeeDirectory = new EmployeeDirectory();
         this.hosAdmin = HospitalAdminSingleton.getInstance();
         this.employeeDirectory.AddEmployeeToDirectory(this.hosAdmin);
+        
+        
+        
+
+        ImageIcon imgThisImg;
+        imgThisImg = new ImageIcon("hosp.jpg");
+        //ImageIcon icon = new ImageIcon(image); 
+        //JLabel thumb = new JLabel();
+       // thumb.setIcon(icon);
+       jLabelimage.setIcon(imgThisImg);
+        
         
         
     }
@@ -52,6 +65,9 @@ public class MainJFrame extends javax.swing.JFrame {
         loginJLabel = new javax.swing.JLabel();
         logoutJButton = new javax.swing.JButton();
         container = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelimage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 700));
@@ -134,7 +150,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(185, 185, 185)
                 .addComponent(loginJLabel)
-                .addContainerGap(464, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -142,6 +158,33 @@ public class MainJFrame extends javax.swing.JFrame {
         container.setBackground(new java.awt.Color(0, 153, 153));
         container.setMaximumSize(new java.awt.Dimension(700, 700));
         container.setLayout(new java.awt.CardLayout());
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel3.setText("Mercy Hospital of Buffalo- We care");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabelimage, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelimage, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        container.add(jPanel2, "card2");
+
         jSplitPane1.setRightComponent(container);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
@@ -160,13 +203,25 @@ public class MainJFrame extends javax.swing.JFrame {
         String passWord = passwordField.getText();
         Employee employeeObject = employeeDirectory.ValidateEmployeeLogin(userName, passWord);
         if (employeeObject == null) {
+            try{
             JOptionPane.showMessageDialog(null, "Invalid Username or Password");
+            }
+            catch(Exception e){
+                System.out.println("UserInterface.MainJFrame.loginJButtonActionPerformed()");
+            }
         }
-        if ("Admin".equals(employeeObject.getEmployeeDepartment())) {
+        else if ("Admin".equals(employeeObject.getEmployeeDepartment())) {
+           // JOptionPane.showMessageDialog(null, "Login Successful");
+
             HospitalAdministrator hospitalAdministrator = new HospitalAdministrator(container,employeeDirectory);
             container.add("HospitalAdministrator", hospitalAdministrator);
             CardLayout cardLayout = (CardLayout) container.getLayout();
             cardLayout.next(container);
+            passwordField.disable();
+            userNameJTextField.disable();
+            loginJButton.setEnabled(false);
+            logoutJButton.setEnabled(true);
+
         }
     }//GEN-LAST:event_loginJButtonActionPerformed
 
@@ -185,6 +240,9 @@ public class MainJFrame extends javax.swing.JFrame {
         container.add("blank", blankJP);
         CardLayout crdLyt = (CardLayout) container.getLayout();
         crdLyt.next(container);
+        logoutJButton.setEnabled(false);
+        loginJButton.setEnabled(true);
+
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
     /**
@@ -227,7 +285,10 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel container;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelimage;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JButton loginJButton;
     private javax.swing.JLabel loginJLabel;
