@@ -1,7 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package UserInterface;
 
 import Business.DoctorEmployee;
-import Business.DoctorEmployee.MedicalDepartment;
 import Business.EmployeeDirectory;
 import Business.SpecialityFactory;
 import java.awt.CardLayout;
@@ -18,28 +22,25 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author Name
  */
-public class DoctorRegistrationForm extends javax.swing.JPanel {
+public class RegisterDoctor extends javax.swing.JPanel {
 
     /**
-     * Creates new form DoctorRegistrationForm
+     * Creates new form RegisterDoctor
      */
+//    public RegisterDoctor() {
+//        initComponents();
+//    }
     private JPanel container;
     EmployeeDirectory employeeDirectory;
 
-    public DoctorRegistrationForm(JPanel container, EmployeeDirectory employeeDirectory) {
+    public RegisterDoctor(JPanel container, EmployeeDirectory employeeDirectory) {
         initComponents();
         this.container = container;
         this.employeeDirectory = employeeDirectory;
-        this.doctorPassword.setVisible(false);
         populateDoctorComboBox();
     }
 
@@ -52,49 +53,24 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
-        doctorPhone = new javax.swing.JTextField();
-        backjButton = new javax.swing.JButton();
-        registerCustomerjButton1 = new javax.swing.JButton();
-        enterpriseLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        doctorEmail = new javax.swing.JTextField();
         doctorFName = new javax.swing.JTextField();
         registerDoctorButton = new javax.swing.JButton();
         doctorLName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         doctorsDepartment = new javax.swing.JComboBox<>();
-        doctorPassword = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
+        doctorPhone = new javax.swing.JTextField();
+        backjButton = new javax.swing.JButton();
+        resetRegistration = new javax.swing.JButton();
+        enterpriseLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        doctorEmail = new javax.swing.JTextField();
+        doctorsPassword = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel5.setText("Phone No:");
-
-        backjButton.setText("<<Back");
-        backjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backjButtonActionPerformed(evt);
-            }
-        });
-
-        registerCustomerjButton1.setText("Reset");
-        registerCustomerjButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerCustomerjButton1ActionPerformed(evt);
-            }
-        });
-
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Doctor Registration Form");
-
-        jLabel1.setText("First Name:");
-
-        jLabel2.setText("Email:");
-
-        jLabel3.setText("Password:");
 
         doctorFName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,50 +101,74 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setText("Phone No:");
+
+        backjButton.setText("<<Back");
+        backjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backjButtonActionPerformed(evt);
+            }
+        });
+
+        resetRegistration.setText("Reset");
+        resetRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetRegistrationActionPerformed(evt);
+            }
+        });
+
+        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel.setText("Doctor Registration Form");
+
+        jLabel1.setText("First Name:");
+
+        jLabel2.setText("Email:");
+
+        jLabel3.setText("Password:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(84, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(enterpriseLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(271, 271, 271)
+                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(backjButton)
+                        .addGap(27, 27, 27)
+                        .addComponent(registerDoctorButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(resetRegistration)
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(doctorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorsPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel5))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(doctorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(67, 67, 67)
                                         .addComponent(jLabel7))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(doctorFName, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6)))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(doctorLName)
-                                    .addComponent(doctorsDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(doctorPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(backjButton)
-                                .addGap(27, 27, 27)
-                                .addComponent(registerDoctorButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(registerCustomerjButton1)
-                                .addGap(29, 29, 29)))))
-                .addContainerGap(213, Short.MAX_VALUE))
+                                        .addComponent(jLabel5))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(doctorFName, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(doctorLName)
+                            .addComponent(doctorsDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(doctorPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,11 +177,12 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
                 .addComponent(enterpriseLabel)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doctorLName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(doctorLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(doctorFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)))
+                        .addComponent(doctorFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -194,26 +195,15 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(doctorPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(doctorsPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registerDoctorButton)
-                    .addComponent(registerCustomerjButton1)
+                    .addComponent(resetRegistration)
                     .addComponent(backjButton))
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
-
-        container.remove(this);
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
-    }//GEN-LAST:event_backjButtonActionPerformed
-
-    private void registerCustomerjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCustomerjButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registerCustomerjButton1ActionPerformed
 
     private void doctorFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorFNameActionPerformed
         // TODO add your handling code here:
@@ -245,14 +235,14 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Doctor with " + doctorEmail + " already exist");
             return;
         }
-        String doctorPassword = "1234";//this.doctorPassword.getText();
+        String doctorPassword = this.doctorsPassword.getText();
         String doctorPhone = this.doctorPhone.getText();
         String doctorDept = (String) this.doctorsDepartment.getSelectedItem();
 
-//        if (doctorFName.equals("") || doctorLName.equals("") || doctorEmail.equals("") || doctorPassword.equals("") || doctorPhone.equals("")) {
-//            JOptionPane.showMessageDialog(null, "All fields are required!");
-//            return;
-//        }
+        if (doctorFName.equals("") || doctorLName.equals("") || doctorEmail.equals("") || doctorPassword.equals("") || doctorPhone.equals("")) {
+            JOptionPane.showMessageDialog(null, "All fields are required!");
+            return;
+        }
         /*Start of factory code*/
         SpecialityFactory specialityFactory = new SpecialityFactory();
         DoctorEmployee doctorEmployee = specialityFactory.getObject(doctorDept);
@@ -274,14 +264,9 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(null, "Doctor registered successfully.");
+        clearRegistrationDetails();
     }//GEN-LAST:event_registerDoctorButtonActionPerformed
-    private void populateDoctorComboBox() {
-        // adding doctors department
-        doctorsDepartment.addItem(MedicalDepartment.Cardiologist.getValue());
-        doctorsDepartment.addItem(MedicalDepartment.Neurologist.getValue());
-        doctorsDepartment.addItem(MedicalDepartment.Orthologist.getValue());
-        doctorsDepartment.addItem(MedicalDepartment.Pediatrician.getValue());
-    }
+
     private void doctorLNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorLNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorLNameActionPerformed
@@ -290,15 +275,42 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorsDepartmentActionPerformed
 
+    private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
+
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+    }//GEN-LAST:event_backjButtonActionPerformed
+
+    private void resetRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetRegistrationActionPerformed
+        // TODO add your handling code here:
+        clearRegistrationDetails();
+    }//GEN-LAST:event_resetRegistrationActionPerformed
+    private void populateDoctorComboBox() {
+        // adding doctors department
+        doctorsDepartment.addItem(DoctorEmployee.MedicalDepartment.Cardiologist.getValue());
+        doctorsDepartment.addItem(DoctorEmployee.MedicalDepartment.Neurologist.getValue());
+        doctorsDepartment.addItem(DoctorEmployee.MedicalDepartment.Orthologist.getValue());
+        doctorsDepartment.addItem(DoctorEmployee.MedicalDepartment.Pediatrician.getValue());
+    }
+
+    private void clearRegistrationDetails() {
+        doctorFName.setText("");
+        doctorLName.setText("");
+        doctorEmail.setText("");
+        populateDoctorComboBox();
+        doctorsPassword.setText("");
+        doctorPhone.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backjButton;
     private javax.swing.JTextField doctorEmail;
     private javax.swing.JTextField doctorFName;
     private javax.swing.JTextField doctorLName;
-    private javax.swing.JPasswordField doctorPassword;
     private javax.swing.JTextField doctorPhone;
     private javax.swing.JComboBox<String> doctorsDepartment;
+    private javax.swing.JPasswordField doctorsPassword;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -306,7 +318,7 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JButton registerCustomerjButton1;
     private javax.swing.JButton registerDoctorButton;
+    private javax.swing.JButton resetRegistration;
     // End of variables declaration//GEN-END:variables
 }
