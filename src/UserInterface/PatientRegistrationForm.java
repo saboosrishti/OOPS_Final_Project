@@ -5,17 +5,15 @@ package UserInterface;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Business.DoctorEmployee;
 import java.awt.CardLayout;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,13 +33,19 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
      * Creates new form PatientRegistrationForm
      */
     private JPanel container;
+
     public PatientRegistrationForm(JPanel container) {
         initComponents();
-        this.container=container;
+        this.container = container;
+        medicalDepartment.addItem(DoctorEmployee.MedicalDepartment.Cardiologist.getValue());
+        medicalDepartment.addItem(DoctorEmployee.MedicalDepartment.Neurologist.getValue());
+        medicalDepartment.addItem(DoctorEmployee.MedicalDepartment.Orthologist.getValue());
+        medicalDepartment.addItem(DoctorEmployee.MedicalDepartment.Pediatrician.getValue());
         String[] years = new String[]{"1990", "1991",
-    "1992","1993","1994","1995","1996","1997","1998","1999","2000","2001",
-    "2002","2003","2004","2005","2006","2007","2008","2009","2010","2011",
-    "2012","2013","2014","2015","2016","2017","2018","2019","2020","2021"};
+            "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001",
+            "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011",
+            "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"};
+        
         yearComboBox.addItem("1991");
         yearComboBox.addItem("1992");
         yearComboBox.addItem("1993");
@@ -51,46 +55,40 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         group.add(femaleRadioBtn);
         add(maleRadioButton);
         add(femaleRadioBtn);
-        //add(option3);
-       // pack();
-        
-        
+
         addBirthdate();
     }
-    
+
     public void addBirthdate() {
         yearComboBox.addItem("1994");
         yearComboBox.addItem("1995");
         yearComboBox.addItem("1996");
         yearComboBox.addItem("1997");
         yearComboBox.addItem("1998");
-        yearComboBox.addItem("1999");yearComboBox.addItem("2000");
+        yearComboBox.addItem("1999");
+        yearComboBox.addItem("2000");
         yearComboBox.addItem("2001");
-        yearComboBox.addItem("2002");yearComboBox.addItem("2003");
+        yearComboBox.addItem("2002");
+        yearComboBox.addItem("2003");
         yearComboBox.addItem("2004");
-        yearComboBox.addItem("2005");yearComboBox.addItem("2006");
+        yearComboBox.addItem("2005");
+        yearComboBox.addItem("2006");
         yearComboBox.addItem("2007");
-        yearComboBox.addItem("2008");yearComboBox.addItem("2009");
+        yearComboBox.addItem("2008");
+        yearComboBox.addItem("2009");
         yearComboBox.addItem("2010");
-        yearComboBox.addItem("2011");yearComboBox.addItem("2012");
+        yearComboBox.addItem("2011");
+        yearComboBox.addItem("2012");
         yearComboBox.addItem("2013");
-        yearComboBox.addItem("2014");yearComboBox.addItem("2015");
+        yearComboBox.addItem("2014");
+        yearComboBox.addItem("2015");
         yearComboBox.addItem("2016");
-        yearComboBox.addItem("2017");yearComboBox.addItem("2018");
+        yearComboBox.addItem("2017");
+        yearComboBox.addItem("2018");
         yearComboBox.addItem("2019");
         yearComboBox.addItem("2020");
-        
-        
-        
-        
-        
-        
-    }
-    
 
-//    public PatientRegistrationForm(JPanel userProcessContainer) {
-//        initComponents();
-//    }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,7 +124,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         registerCustomerjButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        deptName = new javax.swing.JTextField();
+        medicalDepartment = new javax.swing.JComboBox<>();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -229,14 +227,6 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
                 .addContainerGap(241, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(customerPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deptName, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
@@ -276,7 +266,15 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(registerCustomerjButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(registerCustomerjButton1)))
+                        .addComponent(registerCustomerjButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(customerPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(medicalDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 191, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -325,7 +323,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addComponent(deptName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(medicalDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(customerPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -333,50 +331,47 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registerCustomerjButton)
                     .addComponent(registerCustomerjButton1))
-                .addGap(38, 38, 38)
+                .addGap(84, 84, 84)
                 .addComponent(backjButton)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    
     private void patientFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientFnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_patientFnameActionPerformed
-    private boolean usernamePatternCorrect(String username){
+    private boolean usernamePatternCorrect(String username) {
         Pattern p = Pattern.compile("^[a-zA-Z0-9]+_[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
         Matcher m = p.matcher(username);
         boolean b = m.matches();
         return b;
-    
+
     }
-    private boolean pwdPatternCorrect(String password){
-        Pattern p = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[$*#&])[A-Za-z\\\\d$*#&]{6,}$"); 
+
+    private boolean pwdPatternCorrect(String password) {
+        Pattern p = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[$*#&])[A-Za-z\\\\d$*#&]{6,}$");
         Matcher m = p.matcher(password);
         boolean b = m.matches();
         return b;
-    
+
     }
-    
-     public void clearFields() {
+
+    public void clearFields() {
         patientFname.setText("");
         patientLName.setText("");
         maleRadioButton.setSelected(true);
         femaleRadioBtn.setSelected(false);
         customerEmailTextField.setText("");
         customerPhoneTextField.setText("");
-        deptName.setText("");
     }
-     
+
     private void registerCustomerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCustomerjButtonActionPerformed
-        
-        if(patientFname.getText().equals("") || patientLName.getText().equals("") || customerEmailTextField.getText().equals("") || insuranceNo.getText().equals("") || customerPhoneTextField.getText().equals("") || deptName.getText().equals("")) {
+
+        if (patientFname.getText().equals("") || patientLName.getText().equals("") || customerEmailTextField.getText().equals("") || insuranceNo.getText().equals("") || customerPhoneTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "All fields are required!");
             return;
         }
-        
+
         Set<String> emailSet = new HashSet<>();
         BufferedReader br;
         try {
@@ -392,45 +387,43 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         String patientFName = this.patientFname.getText();
         String patientLName = this.patientLName.getText();
         String email = customerEmailTextField.getText();
-        if(emailSet.contains(email)) {
-            JOptionPane.showMessageDialog(null,"Patient with "+email+" already exist");
+        if (emailSet.contains(email)) {
+            JOptionPane.showMessageDialog(null, "Patient with " + email + " already exist");
             return;
         }
         String insurance = insuranceNo.getText();
         String phone = customerPhoneTextField.getText();
-        String department = deptName.getText();
-        String gender="";
-        
-        
-        
+        String department = (String) medicalDepartment.getSelectedItem();
+        String patientStatus = "Admitted";
+        String gender = "";
 
-        
-        
-        if(maleRadioButton.isSelected()) gender="M";
-        else if(femaleRadioBtn.isSelected()) gender="F";
-        String dob = (String)monthComboBox.getSelectedItem()+"/"+(String)dayComboBox.getSelectedItem()+"/"+(String)yearComboBox.getSelectedItem();
-        
+        if (maleRadioButton.isSelected()) {
+            gender = "M";
+        } else if (femaleRadioBtn.isSelected()) {
+            gender = "F";
+        }
+        String dob = (String) monthComboBox.getSelectedItem() + "/" + (String) dayComboBox.getSelectedItem() + "/" + (String) yearComboBox.getSelectedItem();
+
         FileOutputStream fos;
         try {
-            fos = new FileOutputStream("src/assests/patientRecord.csv",true);
+            fos = new FileOutputStream("src/assests/patientRecord.csv", true);
             PrintWriter pw = new PrintWriter(fos);
-            pw.append(patientFName+","+patientLName+","+email+","+insurance+","+dob+","+gender+","+phone+","+department);
+            pw.append(patientFName + "," + patientLName + "," + email + "," + insurance + "," + dob + "," + gender + "," + phone + "," + department+","+patientStatus);
             pw.println();
             pw.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null,"Patient registered successfully.");
+        JOptionPane.showMessageDialog(null, "Patient registered successfully.");
         clearFields();
     }//GEN-LAST:event_registerCustomerjButtonActionPerformed
 
     private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
-        container.remove(this);    
+        container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_backjButtonActionPerformed
@@ -440,8 +433,6 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
     }//GEN-LAST:event_patientLNameActionPerformed
 
     private void yearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboBoxActionPerformed
-
-
 
         // TODO add your handling code here:
     }//GEN-LAST:event_yearComboBoxActionPerformed
@@ -464,7 +455,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
     }//GEN-LAST:event_dayComboBoxActionPerformed
 
     private void maleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioButtonActionPerformed
-        if(femaleRadioBtn.isSelected()) {
+        if (femaleRadioBtn.isSelected()) {
             femaleRadioBtn.disable();
         }
 
@@ -477,7 +468,6 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
     private javax.swing.JTextField customerEmailTextField;
     private javax.swing.JTextField customerPhoneTextField;
     private javax.swing.JComboBox<String> dayComboBox;
-    private javax.swing.JTextField deptName;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JRadioButton femaleRadioBtn;
     private javax.swing.JTextField insuranceNo;
@@ -493,6 +483,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JRadioButton maleRadioButton;
+    private javax.swing.JComboBox<String> medicalDepartment;
     private javax.swing.JComboBox<String> monthComboBox;
     private javax.swing.JTextField patientFname;
     private javax.swing.JTextField patientLName;
