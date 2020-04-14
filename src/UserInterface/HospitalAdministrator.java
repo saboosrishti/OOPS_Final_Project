@@ -105,7 +105,7 @@ public class HospitalAdministrator extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerDoctorActionPerformed
-        DoctorRegistrationForm doctorRegistration = new DoctorRegistrationForm(container);
+        DoctorRegistrationForm doctorRegistration = new DoctorRegistrationForm(container,employeeDirectory);
         container.add("DoctorRegistrationForm", doctorRegistration);
         CardLayout cardLayout = (CardLayout) container.getLayout();
         cardLayout.next(container);

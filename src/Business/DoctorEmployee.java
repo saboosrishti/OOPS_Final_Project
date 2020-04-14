@@ -10,10 +10,37 @@ package Business;
  *
  * @author Name
  */
-public class DoctorEmployee extends Employee{
+public abstract class DoctorEmployee extends Employee{
 
-    public DoctorEmployee(String userName, String password) {
-        super(userName, password);
+
+    public DoctorEmployee(String doctorsDepartment) {
+        super(doctorsDepartment);
     }
 
+    public enum MedicalDepartment {
+
+        Cardiologist("Cardiology"),
+        Orthologist("Orthology"),
+        Neurologist("Neurology"),
+        Pediatrician("Pediatrician");
+
+        private String value;
+
+        private MedicalDepartment(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
+    
+ abstract void speciality(); 
+ 
 }

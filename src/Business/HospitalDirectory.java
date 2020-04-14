@@ -23,11 +23,4 @@ public class HospitalDirectory {
     public void UpdateHospitalDirectory(Person personObject) {
         this.hospitalDirectory.add(personObject);
     }
-
-//    public Person ValidateUserIdPassword(String userName, String userPassword) {
-//
-//        for (Person userID : hospitalDirectory) {
-//
-//        }
-//    }
 }

@@ -5,14 +5,15 @@
  */
 package UserInterface;
 
+import Business.DoctorEmployee;
 import Business.Employee;
 import Business.EmployeeDirectory;
 import Business.HospitalAdminSingleton;
 import java.awt.CardLayout;
-import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 /**
  *
  * @author Rajat
@@ -24,28 +25,23 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     EmployeeDirectory employeeDirectory;
     Employee hosAdmin;
-    
-       public MainJFrame() {
+
+    public MainJFrame() {
         initComponents();
         this.setSize(1366, 700);
         this.employeeDirectory = new EmployeeDirectory();
         this.hosAdmin = HospitalAdminSingleton.getInstance();
         this.employeeDirectory.AddEmployeeToDirectory(this.hosAdmin);
-        
-        
-        
 
         ImageIcon imgThisImg;
         imgThisImg = new ImageIcon("hosp.jpg");
         //ImageIcon icon = new ImageIcon(image); 
         //JLabel thumb = new JLabel();
-       // thumb.setIcon(icon);
-       jLabelimage.setIcon(imgThisImg);
-        
-        
-        
+        // thumb.setIcon(icon);
+        jLabelimage.setIcon(imgThisImg);
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -191,9 +187,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
 
-   
+
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
@@ -203,26 +198,27 @@ public class MainJFrame extends javax.swing.JFrame {
         String passWord = passwordField.getText();
         Employee employeeObject = employeeDirectory.ValidateEmployeeLogin(userName, passWord);
         if (employeeObject == null) {
-            try{
-            JOptionPane.showMessageDialog(null, "Invalid Username or Password");
-            }
-            catch(Exception e){
+            try {
+                JOptionPane.showMessageDialog(null, "Invalid Username or Password");
+            } catch (Exception e) {
                 System.out.println("UserInterface.MainJFrame.loginJButtonActionPerformed()");
             }
-        }
-        else if ("Admin".equals(employeeObject.getEmployeeDepartment())) {
-           // JOptionPane.showMessageDialog(null, "Login Successful");
+        } else if ("Admin".equals(employeeObject.getEmployeeDepartment())) {
+            // JOptionPane.showMessageDialog(null, "Login Successful");
 
-            HospitalAdministrator hospitalAdministrator = new HospitalAdministrator(container,employeeDirectory);
+            HospitalAdministrator hospitalAdministrator = new HospitalAdministrator(container, employeeDirectory);
             container.add("HospitalAdministrator", hospitalAdministrator);
-            CardLayout cardLayout = (CardLayout) container.getLayout();
-            cardLayout.next(container);
             passwordField.disable();
             userNameJTextField.disable();
             loginJButton.setEnabled(false);
             logoutJButton.setEnabled(true);
 
+        } else if (employeeObject instanceof DoctorEmployee) {
+            DoctorsView doctorsView = new DoctorsView(container,employeeObject);
+            container.add("DoctorsView", doctorsView);
         }
+        CardLayout cardLayout = (CardLayout) container.getLayout();
+        cardLayout.next(container);
     }//GEN-LAST:event_loginJButtonActionPerformed
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed

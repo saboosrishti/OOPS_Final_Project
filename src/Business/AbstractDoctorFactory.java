@@ -12,5 +12,5 @@ package Business;
  */
 public interface AbstractDoctorFactory {
     //To be developed
-  public DoctorEmployee getObject();
+  public DoctorEmployee getObject(String doctorDepartment);
 }
