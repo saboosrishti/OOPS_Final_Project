@@ -9,16 +9,21 @@ package Business;
  *
  * @author Name
  */
-public class Employee extends Person{
+public class Employee extends Person {
+
     String employeeID;
     String employeeDepartment;
-    private UserAccount userAccount;
+    UserAccount userAccount;
 
     public Employee(String userName, String password) {
-        this.userAccount = new UserAccount(userName,password);
+        this.userAccount = new UserAccount(userName, password);
     }
 
-    
+    public Employee(String employeeDepartment) {
+        this.userAccount = new UserAccount();
+        this.employeeDepartment = employeeDepartment;
+    }
+
     public UserAccount getUserAccount() {
         return userAccount;
     }
@@ -42,6 +47,5 @@ public class Employee extends Person{
     public void setEmployeeDepartment(String employeeDepartment) {
         this.employeeDepartment = employeeDepartment;
     }
-    
-    
+
 }

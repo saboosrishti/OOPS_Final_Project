@@ -1,5 +1,9 @@
 package UserInterface;
 
+import Business.DoctorEmployee;
+import Business.DoctorEmployee.MedicalDepartment;
+import Business.EmployeeDirectory;
+import Business.SpecialityFactory;
 import java.awt.CardLayout;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -19,7 +23,6 @@ import javax.swing.JPanel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Name
@@ -30,34 +33,14 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
      * Creates new form DoctorRegistrationForm
      */
     private JPanel container;
-    public DoctorRegistrationForm(JPanel container) {
-        initComponents();
-         this.container=container;
-                 this.doctorPassword.setVisible(false);
-          // adding doctors department
-          
-          doctorsDepartment.addItem("Cardiology");
-          doctorsDepartment.addItem("Coronary Care Unit (CCU)");
-          doctorsDepartment.addItem("Critical Care");
-          doctorsDepartment.addItem("Diagnostic Imaging");
-          doctorsDepartment.addItem("Discharge Lounge");
-          doctorsDepartment.addItem("Gastroenterology");doctorsDepartment.addItem("General Surgery");
-          doctorsDepartment.addItem("Gynecology");
-          doctorsDepartment.addItem("Haematology");
-          doctorsDepartment.addItem("Intensive Care Unit (ICU)");doctorsDepartment.addItem("Maternity");
-          doctorsDepartment.addItem("Neonatal");
-          doctorsDepartment.addItem("Nephrology");
-          doctorsDepartment.addItem("Oncology");doctorsDepartment.addItem("Orthopaedics");
-          
-          
-          
-          
-          
-          
-          
-          
-          
+    EmployeeDirectory employeeDirectory;
 
+    public DoctorRegistrationForm(JPanel container, EmployeeDirectory employeeDirectory) {
+        initComponents();
+        this.container = container;
+        this.employeeDirectory = employeeDirectory;
+        this.doctorPassword.setVisible(false);
+        populateDoctorComboBox();
     }
 
     /**
@@ -84,8 +67,7 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         doctorsDepartment = new javax.swing.JComboBox<>();
-        doctorPassword = new javax.swing.JTextField();
-        jPassword = new javax.swing.JPasswordField();
+        doctorPassword = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -137,16 +119,9 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
 
         jLabel7.setText("Department:");
 
-        doctorsDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Otolaryngology"}));
         doctorsDepartment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doctorsDepartmentActionPerformed(evt);
-            }
-        });
-
-        doctorPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorPasswordActionPerformed(evt);
             }
         });
 
@@ -155,61 +130,52 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(195, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(doctorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(enterpriseLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(doctorFName, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(doctorLName, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                            .addComponent(doctorsDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(44, 340, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(doctorPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(enterpriseLabel)
-                .addGap(0, 483, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(288, 288, 288)
-                        .addComponent(registerDoctorButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(registerCustomerjButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backjButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(274, 274, 274))
+                        .addGap(271, 271, 271)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(doctorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(doctorFName, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6)))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(doctorLName)
+                                    .addComponent(doctorsDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(doctorPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(backjButton)
+                                .addGap(27, 27, 27)
+                                .addComponent(registerDoctorButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(registerCustomerjButton1)
+                                .addGap(29, 29, 29)))))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(enterpriseLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(doctorLName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -228,22 +194,19 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(doctorPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registerDoctorButton)
-                    .addComponent(registerCustomerjButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backjButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
-                .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                    .addComponent(registerCustomerjButton1)
+                    .addComponent(backjButton))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
 
-        container.remove(this);    
+        container.remove(this);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_backjButtonActionPerformed
@@ -257,7 +220,7 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
     }//GEN-LAST:event_doctorFNameActionPerformed
 
     private void registerDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerDoctorButtonActionPerformed
-        
+
         Set<String> emailSet = new HashSet<>();
         BufferedReader br;
         try {
@@ -274,44 +237,54 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String doctorFName = this.doctorFName.getText();
         String doctorLName = this.doctorLName.getText();
         String doctorEmail = this.doctorEmail.getText();
-         if(emailSet.contains(doctorEmail)) {
-            JOptionPane.showMessageDialog(null,"Patient with "+doctorEmail+" already exist");
+        if (emailSet.contains(doctorEmail)) {
+            JOptionPane.showMessageDialog(null, "Doctor with " + doctorEmail + " already exist");
             return;
         }
-        String doctorPassword = this.jPassword.getText();
-        
+        String doctorPassword = "1234";//this.doctorPassword.getText();
         String doctorPhone = this.doctorPhone.getText();
-        String doctorDept = (String)this.doctorsDepartment.getSelectedItem();
-        
-         if(doctorFName.equals("") || doctorLName.equals("") || doctorEmail.equals("") || doctorPassword.equals("") || doctorPhone.equals("")) {
-            JOptionPane.showMessageDialog(null, "All fields are required!");
-            return;
-        }
-              
+        String doctorDept = (String) this.doctorsDepartment.getSelectedItem();
+
+//        if (doctorFName.equals("") || doctorLName.equals("") || doctorEmail.equals("") || doctorPassword.equals("") || doctorPhone.equals("")) {
+//            JOptionPane.showMessageDialog(null, "All fields are required!");
+//            return;
+//        }
+        /*Start of factory code*/
+        SpecialityFactory specialityFactory = new SpecialityFactory();
+        DoctorEmployee doctorEmployee = specialityFactory.getObject(doctorDept);
+        doctorEmployee.setFirstName(doctorFName);
+        doctorEmployee.setLastName(doctorLName);
+        doctorEmployee.getUserAccount().setUserName(doctorEmail);
+        doctorEmployee.getUserAccount().setUserPassword(doctorPassword);
+        doctorEmployee.setPhoneNumber(doctorPhone);
+        employeeDirectory.AddEmployeeToDirectory(doctorEmployee);
+        /*End of factory code*/
         FileOutputStream fos;
         try {
-            fos = new FileOutputStream("src/assests/doctorRecord.csv",true);
+            fos = new FileOutputStream("src/assests/doctorRecord.csv", true);
             PrintWriter pw = new PrintWriter(fos);
-            pw.append(doctorFName+","+doctorLName+","+doctorEmail+","+doctorPassword+","+doctorPhone+","+doctorDept);
+            pw.append(doctorFName + "," + doctorLName + "," + doctorEmail + "," + doctorPassword + "," + doctorPhone + "," + doctorDept);
             pw.println();
             pw.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null,"Doctor registered successfully.");    
+        JOptionPane.showMessageDialog(null, "Doctor registered successfully.");
     }//GEN-LAST:event_registerDoctorButtonActionPerformed
-
+    private void populateDoctorComboBox() {
+        // adding doctors department
+        doctorsDepartment.addItem(MedicalDepartment.Cardiologist.getValue());
+        doctorsDepartment.addItem(MedicalDepartment.Neurologist.getValue());
+        doctorsDepartment.addItem(MedicalDepartment.Orthologist.getValue());
+        doctorsDepartment.addItem(MedicalDepartment.Pediatrician.getValue());
+    }
     private void doctorLNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorLNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorLNameActionPerformed
-
-    private void doctorPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doctorPasswordActionPerformed
 
     private void doctorsDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorsDepartmentActionPerformed
         // TODO add your handling code here:
@@ -323,7 +296,7 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
     private javax.swing.JTextField doctorEmail;
     private javax.swing.JTextField doctorFName;
     private javax.swing.JTextField doctorLName;
-    private javax.swing.JTextField doctorPassword;
+    private javax.swing.JPasswordField doctorPassword;
     private javax.swing.JTextField doctorPhone;
     private javax.swing.JComboBox<String> doctorsDepartment;
     private javax.swing.JLabel enterpriseLabel;
@@ -333,7 +306,6 @@ public class DoctorRegistrationForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPasswordField jPassword;
     private javax.swing.JButton registerCustomerjButton1;
     private javax.swing.JButton registerDoctorButton;
     // End of variables declaration//GEN-END:variables

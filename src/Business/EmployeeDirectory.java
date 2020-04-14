@@ -4,7 +4,6 @@ package Business;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.util.ArrayList;
 
 /**
@@ -12,7 +11,7 @@ import java.util.ArrayList;
  * @author raunak
  */
 public class EmployeeDirectory {
-    
+
     private final ArrayList<Employee> employeeList;
 
     public EmployeeDirectory() {
@@ -22,16 +21,18 @@ public class EmployeeDirectory {
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }
-    public void AddEmployeeToDirectory(Employee employee){
+
+    public void AddEmployeeToDirectory(Employee employee) {
         this.employeeList.add(employee);
     }
-    
-    public Employee ValidateEmployeeLogin(String userName, String Password){
+
+    public Employee ValidateEmployeeLogin(String userName, String Password) {
         //User a doctor factory to return the obejct
-        for(Employee employee : this.employeeList){
-            if(employee.getUserAccount().getUserName().equalsIgnoreCase(userName) && 
-                    employee.getUserAccount().getUserPassword().equalsIgnoreCase(Password))
+        for (Employee employee : this.employeeList) {
+            if (employee.getUserAccount().getUserName().equalsIgnoreCase(userName)
+                    && employee.getUserAccount().getUserPassword().equalsIgnoreCase(Password)) {
                 return employee;
+            }
         }
         return null;
     }

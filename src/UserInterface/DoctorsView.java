@@ -5,6 +5,7 @@
  */
 package UserInterface;
 
+import Business.Employee;
 import Business.Patient;
 import java.awt.CardLayout;
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -23,30 +25,31 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Name
  */
-public class HospitalPatientList extends javax.swing.JPanel {
+public class DoctorsView extends javax.swing.JPanel {
 
     /**
      * Creates new form AdminView
      */
     private JPanel container;
+    Employee employeeObject;
+    List<Patient> patientList;
 
-    public HospitalPatientList(JPanel container) {
-        initComponents();
-
-        //List<Patient> list =populateData(dm);
-        // List<Patient> list =populateData();
-        populateData();
+    DoctorsView(JPanel container, Employee employeeObject) {
         this.container = container;
+        this.employeeObject = employeeObject;
+        patientList = new ArrayList<>();
+        cachePatientData(patientList);
+        initComponents();
+        populateData();
     }
 
-    private void sort(DefaultTableModel dm) {
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dm);
-        patientJTable.setRowSorter(sorter);
+    public void cachePatientData(List<Patient> patientList) {
+
     }
 
     public void populateData() {
         List<Patient> list = new ArrayList<>();
-        DefaultTableModel dm = (DefaultTableModel) patientJTable.getModel();
+        DefaultTableModel dm = (DefaultTableModel) patientsTable.getModel();
         dm.setRowCount(0);
         BufferedReader br;
         try {
@@ -55,11 +58,15 @@ public class HospitalPatientList extends javax.swing.JPanel {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] cols = line.split(",");
-                Object[] row = new Object[7];
-                row[0] = cols[0] + " " + cols[1];
-                row[1] = cols[4];
-                row[2] = cols[5];
-                row[3] = cols[8];
+                if (cols[7].equals(employeeObject.getEmployeeDepartment())) {
+                    Object[] row = new Object[7];
+                    row[0] = cols[0] + " " + cols[1];
+                    row[1] = cols[2];
+                    row[2] = cols[5];
+                    row[3] = cols[8];
+                    dm.addRow(row);
+                }
+//              row[3] = cols[8];
 //                Patient p = new Patient();
 //                p.setPatientFName(cols[0]);
 //                p.setPatientLName(cols[1]);
@@ -67,7 +74,6 @@ public class HospitalPatientList extends javax.swing.JPanel {
 //                p.setGender(cols[5]);
 //                p.setStatus(cols[8]);
 //                list.add(p);
-                dm.addRow(row);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,6 +81,11 @@ public class HospitalPatientList extends javax.swing.JPanel {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         sort(dm);
+    }
+
+    private void sort(DefaultTableModel dm) {
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dm);
+        patientsTable.setRowSorter(sorter);
     }
 
     /**
@@ -88,15 +99,17 @@ public class HospitalPatientList extends javax.swing.JPanel {
 
         jColorChooser1 = new javax.swing.JColorChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        patientJTable = new javax.swing.JTable();
+        patientsTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         backjButton = new javax.swing.JButton();
+        assignPatientToMe = new javax.swing.JButton();
+        treatPatient = new javax.swing.JButton();
 
         jColorChooser1.setBackground(new java.awt.Color(0, 153, 153));
 
         setBackground(new java.awt.Color(0, 153, 153));
 
-        patientJTable.setModel(new javax.swing.table.DefaultTableModel(
+        patientsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -104,10 +117,10 @@ public class HospitalPatientList extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Patient Name", "Age", "Sex", "Status"
+                "Patient Name", "User Name", "Sex", "Status"
             }
         ));
-        jScrollPane1.setViewportView(patientJTable);
+        jScrollPane1.setViewportView(patientsTable);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Hospital Patient List");
@@ -116,6 +129,20 @@ public class HospitalPatientList extends javax.swing.JPanel {
         backjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backjButtonActionPerformed(evt);
+            }
+        });
+
+        assignPatientToMe.setText("Assign");
+        assignPatientToMe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignPatientToMeActionPerformed(evt);
+            }
+        });
+
+        treatPatient.setText("Treat Patient");
+        treatPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                treatPatientActionPerformed(evt);
             }
         });
 
@@ -130,10 +157,14 @@ public class HospitalPatientList extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backjButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(assignPatientToMe, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(treatPatient)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -144,8 +175,11 @@ public class HospitalPatientList extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(backjButton)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backjButton)
+                    .addComponent(treatPatient)
+                    .addComponent(assignPatientToMe))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,12 +190,46 @@ public class HospitalPatientList extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_backjButtonActionPerformed
 
+    private void assignPatientToMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignPatientToMeActionPerformed
+        int selectedRow = patientsTable.getSelectedRow();
+        int selectedColumn = 3;
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row");
+            return;
+        } else {
+            BufferedReader br;
+            try {
+                br = new BufferedReader(new FileReader("src/assests/patientRecord.csv"));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    // use comma as separator
+                    String[] cols = line.split(",");
+                    if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
+                        cols[8] = "Doctor Assigned";
+                        patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_assignPatientToMeActionPerformed
+
+    private void treatPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_treatPatientActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_treatPatientActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton assignPatientToMe;
     private javax.swing.JButton backjButton;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable patientJTable;
+    private javax.swing.JTable patientsTable;
+    private javax.swing.JButton treatPatient;
     // End of variables declaration//GEN-END:variables
 }
