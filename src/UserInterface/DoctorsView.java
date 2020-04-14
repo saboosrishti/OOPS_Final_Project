@@ -32,19 +32,15 @@ public class DoctorsView extends javax.swing.JPanel {
      */
     private JPanel container;
     Employee employeeObject;
-    List<Patient> patientList;
 
     DoctorsView(JPanel container, Employee employeeObject) {
+        initComponents();
         this.container = container;
         this.employeeObject = employeeObject;
-        patientList = new ArrayList<>();
-        cachePatientData(patientList);
-        initComponents();
+        sendEmail.setVisible(false);
+        emailMessage.setVisible(false);
+
         populateData();
-    }
-
-    public void cachePatientData(List<Patient> patientList) {
-
     }
 
     public void populateData() {
@@ -104,6 +100,8 @@ public class DoctorsView extends javax.swing.JPanel {
         backjButton = new javax.swing.JButton();
         assignPatientToMe = new javax.swing.JButton();
         treatPatient = new javax.swing.JButton();
+        emailMessage = new javax.swing.JTextField();
+        sendEmail = new javax.swing.JButton();
 
         jColorChooser1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -146,6 +144,8 @@ public class DoctorsView extends javax.swing.JPanel {
             }
         });
 
+        sendEmail.setText("sendEmail");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,6 +166,15 @@ public class DoctorsView extends javax.swing.JPanel {
                         .addComponent(treatPatient)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(emailMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(sendEmail)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +188,11 @@ public class DoctorsView extends javax.swing.JPanel {
                     .addComponent(backjButton)
                     .addComponent(treatPatient)
                     .addComponent(assignPatientToMe))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(emailMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sendEmail)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -205,8 +218,13 @@ public class DoctorsView extends javax.swing.JPanel {
                     // use comma as separator
                     String[] cols = line.split(",");
                     if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
-                        cols[8] = "Doctor Assigned";
-                        patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
+                        if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
+                            cols[8] = "Doctor Assigned";
+                            patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Patient has already been assigned to a doctor");
+                        }
+                        break;
                     }
                 }
             } catch (FileNotFoundException ex) {
@@ -219,17 +237,56 @@ public class DoctorsView extends javax.swing.JPanel {
     }//GEN-LAST:event_assignPatientToMeActionPerformed
 
     private void treatPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_treatPatientActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = patientsTable.getSelectedRow();
+        int selectedColumn = 3;
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row");
+            return;
+        } else {
+            BufferedReader br;
+            try {
+                br = new BufferedReader(new FileReader("src/assests/patientRecord.csv"));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    // use comma as separator
+                    String[] cols = line.split(",");
+                    if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
+                        if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
+                            cols[8] = "Treatment Completed";
+                            patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
+                            emailPatientReport();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Patient treatment has been completed");
+                        }
+                        break;
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_treatPatientActionPerformed
-
+    private void emailPatientReport() {
+        int dialogButton = JOptionPane.showConfirmDialog(null, "Send report through Email?");
+        if (dialogButton == JOptionPane.YES_OPTION) {
+            sendEmail.setVisible(true);
+            emailMessage.setVisible(true);
+        } else {
+            return;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignPatientToMe;
     private javax.swing.JButton backjButton;
+    private javax.swing.JTextField emailMessage;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable patientsTable;
+    private javax.swing.JButton sendEmail;
     private javax.swing.JButton treatPatient;
     // End of variables declaration//GEN-END:variables
 }

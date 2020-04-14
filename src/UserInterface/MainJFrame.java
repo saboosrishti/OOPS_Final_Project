@@ -214,8 +214,12 @@ public class MainJFrame extends javax.swing.JFrame {
             logoutJButton.setEnabled(true);
 
         } else if (employeeObject instanceof DoctorEmployee) {
-            DoctorsView doctorsView = new DoctorsView(container,employeeObject);
+            DoctorsView doctorsView = new DoctorsView(container, employeeObject);
             container.add("DoctorsView", doctorsView);
+            passwordField.disable();
+            userNameJTextField.disable();
+            loginJButton.setEnabled(false);
+            logoutJButton.setEnabled(true);
         }
         CardLayout cardLayout = (CardLayout) container.getLayout();
         cardLayout.next(container);
