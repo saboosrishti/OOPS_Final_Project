@@ -244,14 +244,14 @@ public class RegisterDoctor extends javax.swing.JPanel {
             return;
         }
         /*Start of factory code*/
-        SpecialityFactory specialityFactory = new SpecialityFactory();
-        DoctorEmployee doctorEmployee = specialityFactory.getObject(doctorDept);
-        doctorEmployee.setFirstName(doctorFName);
-        doctorEmployee.setLastName(doctorLName);
-        doctorEmployee.getUserAccount().setUserName(doctorEmail);
-        doctorEmployee.getUserAccount().setUserPassword(doctorPassword);
-        doctorEmployee.setPhoneNumber(doctorPhone);
-        employeeDirectory.AddEmployeeToDirectory(doctorEmployee);
+//        SpecialityFactory specialityFactory = new SpecialityFactory();
+//        DoctorEmployee doctorEmployee = specialityFactory.getObject(doctorDept);
+//        doctorEmployee.setFirstName(doctorFName);
+//        doctorEmployee.setLastName(doctorLName);
+//        doctorEmployee.getUserAccount().setUserName(doctorEmail);
+//        doctorEmployee.getUserAccount().setUserPassword(doctorPassword);
+//        doctorEmployee.setPhoneNumber(doctorPhone);
+//        employeeDirectory.AddEmployeeToDirectory(doctorEmployee);
         /*End of factory code*/
         FileOutputStream fos;
         try {
