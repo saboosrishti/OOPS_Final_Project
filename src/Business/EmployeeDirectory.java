@@ -26,14 +26,14 @@ public class EmployeeDirectory {
         this.employeeList.add(employee);
     }
 
-    public Employee ValidateEmployeeLogin(String userName, String Password) {
+    public boolean ValidateEmployeeLogin(String userName, String Password) {
         //User a doctor factory to return the obejct
         for (Employee employee : this.employeeList) {
             if (employee.getUserAccount().getUserName().equalsIgnoreCase(userName)
                     && employee.getUserAccount().getUserPassword().equalsIgnoreCase(Password)) {
-                return employee;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 }
