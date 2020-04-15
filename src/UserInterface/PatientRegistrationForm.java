@@ -340,21 +340,6 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
     private void patientFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientFnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_patientFnameActionPerformed
-    private boolean usernamePatternCorrect(String username) {
-        Pattern p = Pattern.compile("^[a-zA-Z0-9]+_[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
-        Matcher m = p.matcher(username);
-        boolean b = m.matches();
-        return b;
-
-    }
-
-    private boolean pwdPatternCorrect(String password) {
-        Pattern p = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[$*#&])[A-Za-z\\\\d$*#&]{6,}$");
-        Matcher m = p.matcher(password);
-        boolean b = m.matches();
-        return b;
-
-    }
 
     public void clearFields() {
         patientFname.setText("");
