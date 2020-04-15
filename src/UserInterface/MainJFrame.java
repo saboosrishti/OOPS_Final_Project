@@ -153,7 +153,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(185, 185, 185)
                 .addComponent(loginJLabel)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -162,8 +162,12 @@ public class MainJFrame extends javax.swing.JFrame {
         container.setMaximumSize(new java.awt.Dimension(700, 700));
         container.setLayout(new java.awt.CardLayout());
 
+        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel3.setText("Mercy Hospital of Buffalo- We care");
+
+        jLabelimage.setBackground(new java.awt.Color(0, 153, 153));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -215,12 +219,16 @@ public class MainJFrame extends javax.swing.JFrame {
         } else {
             DoctorEmployee doctorEmployee = verifyDoctorsLogin(userName, passWord);
             if (doctorEmployee != null) {
-                DoctorsView doctorsView = new DoctorsView(container, doctorEmployee,evt);
-                container.add("DoctorsView", doctorsView);
-                passwordField.disable();
-                userNameJTextField.disable();
-                loginJButton.setEnabled(false);
-                logoutJButton.setEnabled(true);
+                try {
+                    DoctorsView doctorsView = new DoctorsView(container, doctorEmployee,evt);
+                    container.add("DoctorsView", doctorsView);
+                    passwordField.disable();
+                    userNameJTextField.disable();
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Invalid username or password");

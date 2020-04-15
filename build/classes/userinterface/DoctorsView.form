@@ -171,7 +171,7 @@
         <Property name="text" type="java.lang.String" value="Assign"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="assignPatientToMeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="assignPatientToMeActionPerformed,visualizeHospitalizationEvt"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="treatPatient">
@@ -179,7 +179,7 @@
         <Property name="text" type="java.lang.String" value="Treat Patient"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="treatPatientActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="treatPatientActionPerformed,visualizeHospitalizationEvt"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="emailMessage">

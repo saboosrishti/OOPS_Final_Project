@@ -49,8 +49,7 @@ public class DoctorsView extends javax.swing.JPanel {
      */
     private JPanel container;
     Employee employeeObject;
-    Map<String,Integer> map = new HashMap<>();
-    DoctorsView(JPanel container, Employee employeeObject, java.awt.event.ActionEvent evt) {
+    DoctorsView(JPanel container, Employee employeeObject, java.awt.event.ActionEvent evt) throws IOException {
         initComponents();
         this.container = container;
         this.employeeObject = employeeObject;
@@ -78,12 +77,6 @@ public class DoctorsView extends javax.swing.JPanel {
                     row[1] = cols[2];
                     row[2] = cols[5];
                     row[3] = cols[8];
-                    if(map.containsKey(cols[8])){
-                        map.put(cols[8],map.get(cols[8])+1);  
-                      }
-                      else{
-                          map.put(cols[8],1);
-                      }
                     dm.addRow(row);
                 }
             }
@@ -151,6 +144,7 @@ public class DoctorsView extends javax.swing.JPanel {
         assignPatientToMe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignPatientToMeActionPerformed(evt);
+                visualizeHospitalizationEvt(evt);
             }
         });
 
@@ -158,6 +152,7 @@ public class DoctorsView extends javax.swing.JPanel {
         treatPatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 treatPatientActionPerformed(evt);
+                visualizeHospitalizationEvt(evt);
             }
         });
 
@@ -254,8 +249,29 @@ public class DoctorsView extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_backjButtonActionPerformed
 
-    private void visualizeHospitalization(java.awt.event.ActionEvent evt) {
-        System.out.println(map);
+    private void visualizeHospitalization(java.awt.event.ActionEvent evt) throws IOException {
+        Map<String,Integer> map = new HashMap<>();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader("src/assests/patientRecord.csv"));
+             String line;
+            while ((line = br.readLine()) != null) {
+                String[] cols = line.split(",");
+                System.out.println(cols[7]);
+                if (cols[7].equals(employeeObject.getEmployeeDepartment())) {
+                    if(map.containsKey(cols[8])){
+                        map.put(cols[8],map.get(cols[8])+1);  
+                      }
+                    else{
+                        map.put(cols[8],1);
+                    }
+                }
+            }
+            System.out.println(map);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DoctorsView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         // TODO add your handling code here:
         DefaultPieDataset pieDataSet= new DefaultPieDataset();
         for (String name :map.keySet()) {
@@ -266,7 +282,7 @@ public class DoctorsView extends javax.swing.JPanel {
         PiePlot p=(PiePlot) chart.getPlot();
         p.setSectionPaint("Treatment Completed", Color.BLUE);
         p.setSectionPaint("Admitted", Color.MAGENTA);
-        p.setSectionPaint("Doctor Assigned", Color.red);
+        p.setSectionPaint("Doctor Assigned", Color.green);
         ChartPanel chartPanel = new ChartPanel(chart, false);
         chartPane.add(chartPanel);
         chartPanel.setSize(350,350);
@@ -274,7 +290,7 @@ public class DoctorsView extends javax.swing.JPanel {
 
     }                                               
 
-    private void updateStatus(String status,String username,java.awt.event.ActionEvent evt){
+    private void updateStatus(String status,String username,java.awt.event.ActionEvent evt) throws IOException{
         System.out.println(status);
         File inputFile = new File("src/assests/patientRecord.csv");
         BufferedReader br;
@@ -445,6 +461,14 @@ public class DoctorsView extends javax.swing.JPanel {
     private void emailMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailMessageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailMessageActionPerformed
+
+    private void visualizeHospitalizationEvt(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizeHospitalizationEvt
+        try {
+            visualizeHospitalization(evt);
+        } catch (IOException ex) {
+            Logger.getLogger(DoctorsView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_visualizeHospitalizationEvt
     private void emailPatientReport() {
         int dialogButton = JOptionPane.showConfirmDialog(null, "Send report through Email?");
         if (dialogButton == JOptionPane.YES_OPTION) {
