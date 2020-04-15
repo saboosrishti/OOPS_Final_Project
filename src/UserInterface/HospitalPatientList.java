@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -45,9 +46,7 @@ public class HospitalPatientList extends javax.swing.JPanel {
     }
 
     public void populateData() {
-        List<Patient> list = new ArrayList<>();
-        DefaultTableModel dm = (DefaultTableModel) patientJTable.getModel();
-        dm.setRowCount(0);
+        List<String> list = new ArrayList<>();
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader("src/assests/patientRecord.csv"));
@@ -55,26 +54,30 @@ public class HospitalPatientList extends javax.swing.JPanel {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] cols = line.split(",");
-                Object[] row = new Object[7];
-                row[0] = cols[0] + " " + cols[1];
-                row[1] = cols[4];
-                row[2] = cols[5];
-                row[3] = cols[8];
-//                Patient p = new Patient();
-//                p.setPatientFName(cols[0]);
-//                p.setPatientLName(cols[1]);
-//                p.setDob(cols[4]);
-//                p.setGender(cols[5]);
-//                p.setStatus(cols[8]);
-//                list.add(p);
-                dm.addRow(row);
+                list.add(cols[0] + "," + cols[1] + "," + cols[4] + "," + cols[5] + "," + cols[8]);
             }
+            sortTable(list.stream().sorted().collect(Collectors.toList()));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void sortTable(List<String> listOfDoctors) {
+        DefaultTableModel dm = (DefaultTableModel) patientJTable.getModel();
+        dm.setRowCount(0);
         sort(dm);
+        listOfDoctors.stream().map((list) -> list.split(",")).map((cols) -> {
+            Object[] row = new Object[7];
+            row[0] = cols[0] + " " + cols[1];
+            row[1] = cols[2];
+            row[2] = cols[3];
+            row[3] = cols[4];
+            return row;
+        }).forEachOrdered((row) -> {
+            dm.addRow(row);
+        });
     }
 
     /**

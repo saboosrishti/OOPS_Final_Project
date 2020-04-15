@@ -62,7 +62,6 @@ public class DoctorsView extends javax.swing.JPanel {
     }
 
     public void populateData() {
-        List<Patient> list = new ArrayList<>();
         DefaultTableModel dm = (DefaultTableModel) patientsTable.getModel();
         dm.setRowCount(0);
         BufferedReader br;
@@ -87,15 +86,6 @@ public class DoctorsView extends javax.swing.JPanel {
                       }
                     dm.addRow(row);
                 }
-                
-//              row[3] = cols[8];
-//                Patient p = new Patient();
-//                p.setPatientFName(cols[0]);
-//                p.setPatientLName(cols[1]);
-//                p.setDob(cols[4]);
-//                p.setGender(cols[5]);
-//                p.setStatus(cols[8]);
-//                list.add(p);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
