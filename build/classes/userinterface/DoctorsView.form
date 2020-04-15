@@ -169,11 +169,17 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="emailMessage">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailMessageActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="sendEmail">
       <Properties>
         <Property name="text" type="java.lang.String" value="sendEmail"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendEmailActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

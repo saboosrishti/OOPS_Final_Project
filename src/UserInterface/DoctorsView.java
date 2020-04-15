@@ -15,14 +15,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.mail.Authenticator;
 import java.util.ArrayList;
 import java.util.List;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
 
 /**
  *
@@ -139,7 +144,18 @@ public class DoctorsView extends javax.swing.JPanel {
             }
         });
 
+        emailMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailMessageActionPerformed(evt);
+            }
+        });
+
         sendEmail.setText("sendEmail");
+        sendEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendEmailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -310,6 +326,62 @@ public class DoctorsView extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_treatPatientActionPerformed
+    
+      private void SendMail(String toMail, String text){
+        String to = toMail;
+        String from = "hospitalservice20@gmail.com";
+        String host = "smtp.gmail.com";
+        Properties properties = new Properties();
+
+        // Setup mail server
+        
+        properties.put("mail.smtp.from", "hospitalservice20@gmail.com");
+        properties.put("mail.smtp.host", host);
+        properties.put("mai.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.port", "587");
+        properties.setProperty("mail.smtp.user", from);
+        properties.setProperty("mail.smtp.password", "Demo@123");
+        properties.setProperty("mail.smtp.auth", "true");
+        
+         Session session = Session.getDefaultInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication("hospitalservice20@gmail.com", "Demo@123");
+            }
+        });
+         
+         try {
+           // Create a default MimeMessage object.
+           MimeMessage message = new MimeMessage(session);
+           // Set From: header field of the header.
+           message.setFrom(new InternetAddress(from));
+           // Set To: header field of the header.
+           message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+           // Set Subject: header field
+           message.setSubject("Demo Report");
+
+           // Send the actual HTML message, as big as you like
+           message.setContent("<h1>"+text+"</h1>", "text/html");
+
+           // Send message
+           Transport.send(message);
+           System.out.println("Sent message successfully....");
+           JOptionPane.showMessageDialog(null, "Sent email to patient !!");
+        } catch (MessagingException mex) {
+           mex.printStackTrace();
+        }
+     }
+    
+    private void sendEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendEmailActionPerformed
+        // TODO add your handling code here:
+        String text = emailMessage.getText();
+        int selectedRow = patientsTable.getSelectedRow();
+        SendMail((String) patientsTable.getValueAt(selectedRow, 1),text);
+    }//GEN-LAST:event_sendEmailActionPerformed
+
+    private void emailMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailMessageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailMessageActionPerformed
     private void emailPatientReport() {
         int dialogButton = JOptionPane.showConfirmDialog(null, "Send report through Email?");
         if (dialogButton == JOptionPane.YES_OPTION) {
