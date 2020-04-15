@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class DoctorsView extends javax.swing.JPanel {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] cols = line.split(",");
+                System.out.println(cols[7]);
                 if (cols[7].equals(employeeObject.getEmployeeDepartment())) {
                     Object[] row = new Object[7];
                     row[0] = cols[0] + " " + cols[1];
@@ -219,12 +221,12 @@ public class DoctorsView extends javax.swing.JPanel {
                 // use comma as separator
                 String[] cols = line.split(",");
                 if(cols[2].equals(username)){
-                     csvContent.add(cols[0]+","+cols[1]+","+cols[2]+","+cols[3]+","+cols[4]+","+cols[5]+","+cols[6]+","+status); 
+                     csvContent.add(cols[0]+","+cols[1]+","+cols[2]+","+cols[3]+","+cols[4]+","+cols[5]+","+cols[6]+","+cols[7]+","+status); 
                 }
                 else{
-                    csvContent.add(cols[0]+","+cols[1]+","+cols[2]+","+cols[3]+"v,"+cols[4]+","+cols[5]+","+cols[6]+","+cols[7]);
+                    csvContent.add(cols[0]+","+cols[1]+","+cols[2]+","+cols[3]+","+cols[4]+","+cols[5]+","+cols[6]+","+cols[7]+","+cols[8]);
                 }
-                System.out.println(csvContent);
+               
 //                fos = new FileOutputStream("src/assests/patientRecord.csv", true);
 //                PrintWriter pw = new PrintWriter(fos);
 //                for(int i=0;i<csvContent.size();i++){
@@ -233,6 +235,18 @@ public class DoctorsView extends javax.swing.JPanel {
 //                pw.println();
 //                pw.close();
             }
+            System.out.println(csvContent);
+            FileWriter fw = new FileWriter("src/assests/patientRecord.csv",false);
+            fos = new FileOutputStream("src/assests/patientRecord.csv", true);
+            PrintWriter pw = new PrintWriter(fos);
+            for(int i=0;i<csvContent.size();i++){
+                pw.append(csvContent.get(i));
+                if(i<csvContent.size()-1){
+                    pw.println();
+                }
+            }
+            pw.println();
+            pw.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -287,10 +301,11 @@ public class DoctorsView extends javax.swing.JPanel {
                 while ((line = br.readLine()) != null) {
                     // use comma as separator
                     String[] cols = line.split(",");
+                    System.out.println(cols[2]);
                     if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
                         if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
                             cols[8] = "Treatment Completed";
-                            updateStatus("Treatment Completed", (String) patientsTable.getValueAt(selectedRow, 3));
+                            updateStatus("Treatment Completed", (String) patientsTable.getValueAt(selectedRow, 1));
                             patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
                             emailPatientReport();
                         } else {
