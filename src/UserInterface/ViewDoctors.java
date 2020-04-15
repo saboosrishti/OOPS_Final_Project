@@ -5,6 +5,7 @@
  */
 package UserInterface;
 
+import java.awt.CardLayout;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,7 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -26,11 +30,12 @@ public class ViewDoctors extends javax.swing.JPanel {
     ViewDoctors(JPanel container) {
         initComponents();
         this.container = container;
-        List<String> listOfDoctors = new ArrayList<>();
-        populateList( listOfDoctors);
+//        List<String> listOfDoctors = new ArrayList<>();
+        populateTable();
     }
 
-    private void populateList(List<String> listOfDoctors){
+    private void populateTable() {
+        List<String> listOfDoctors = new ArrayList<>();
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader("src/assests/doctorRecord.csv"));
@@ -38,27 +43,37 @@ public class ViewDoctors extends javax.swing.JPanel {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] cols = line.split(",");
-                listOfDoctors.add(cols[0]);
-                    Object[] row = new Object[7];
-                    row[0] = cols[0] + " " + cols[1];
-                    row[1] = cols[2];
-                    row[2] = cols[5];
-                    row[3] = cols[8];
-//              row[3] = cols[8];
-//                Patient p = new Patient();
-//                p.setPatientFName(cols[0]);
-//                p.setPatientLName(cols[1]);
-//                p.setDob(cols[4]);
-//                p.setGender(cols[5]);
-//                p.setStatus(cols[8]);
-//                list.add(p);
+                listOfDoctors.add(cols[0] + "," + cols[1] + "," + cols[2]+","+cols[5]);
             }
+            sortTable(listOfDoctors.stream().sorted().collect(Collectors.toList()));
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void sortTable(List<String> listOfDoctors) {
+         DefaultTableModel dm = (DefaultTableModel) doctorJTable.getModel();
+        dm.setRowCount(0);
+        enableSorter(dm);
+        listOfDoctors.stream().map((list) -> list.split(",")).map((cols) -> {
+            Object[] row = new Object[7];
+            row[0] = cols[0];
+            row[1] = cols[1];
+            row[2] = cols[2];
+            row[3] = cols[3];
+            return row;
+        }).forEachOrdered((row) -> {
+            dm.addRow(row);
+        });
+    }
+        private void enableSorter(DefaultTableModel dm) {
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dm);
+        doctorJTable.setRowSorter(sorter);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,10 +83,35 @@ public class ViewDoctors extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        doctorsList = new java.awt.List();
-        sortJButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        doctorJTable = new javax.swing.JTable();
+        enterpriseLabel = new javax.swing.JLabel();
+        backjButton = new javax.swing.JButton();
 
-        sortJButton.setText("Sort");
+        setBackground(new java.awt.Color(0, 153, 153));
+
+        doctorJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "First Name", "Last Name", "User Name", "Department"
+            }
+        ));
+        jScrollPane1.setViewportView(doctorJTable);
+
+        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel.setText("List of Doctors");
+
+        backjButton.setText("<<Back");
+        backjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backjButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,27 +120,41 @@ public class ViewDoctors extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doctorsList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 251, Short.MAX_VALUE)
-                        .addComponent(sortJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 321, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(enterpriseLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backjButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(doctorsList, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(sortJButton)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(enterpriseLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(backjButton)
+                .addContainerGap(233, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
+
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+    }//GEN-LAST:event_backjButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.List doctorsList;
-    private javax.swing.JButton sortJButton;
+    private javax.swing.JButton backjButton;
+    private javax.swing.JTable doctorJTable;
+    private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
