@@ -88,6 +88,8 @@ public class ViewDoctors extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         backjButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 153, 153));
+
         doctorJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
