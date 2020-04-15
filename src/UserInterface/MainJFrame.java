@@ -215,7 +215,7 @@ public class MainJFrame extends javax.swing.JFrame {
         } else {
             DoctorEmployee doctorEmployee = verifyDoctorsLogin(userName, passWord);
             if (doctorEmployee != null) {
-                DoctorsView doctorsView = new DoctorsView(container, doctorEmployee);
+                DoctorsView doctorsView = new DoctorsView(container, doctorEmployee,evt);
                 container.add("DoctorsView", doctorsView);
                 passwordField.disable();
                 userNameJTextField.disable();

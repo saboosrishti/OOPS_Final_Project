@@ -7,6 +7,7 @@ package UserInterface;
 import Business.Employee;
 import Business.Patient;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +18,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.mail.Authenticator;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
@@ -27,6 +30,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 
 /**
@@ -40,8 +49,8 @@ public class DoctorsView extends javax.swing.JPanel {
      */
     private JPanel container;
     Employee employeeObject;
-
-    DoctorsView(JPanel container, Employee employeeObject) {
+    Map<String,Integer> map = new HashMap<>();
+    DoctorsView(JPanel container, Employee employeeObject, java.awt.event.ActionEvent evt) {
         initComponents();
         this.container = container;
         this.employeeObject = employeeObject;
@@ -49,6 +58,7 @@ public class DoctorsView extends javax.swing.JPanel {
         emailMessage.setVisible(false);
 
         populateData();
+        visualizeHospitalization(evt);
     }
 
     public void populateData() {
@@ -69,8 +79,15 @@ public class DoctorsView extends javax.swing.JPanel {
                     row[1] = cols[2];
                     row[2] = cols[5];
                     row[3] = cols[8];
+                    if(map.containsKey(cols[8])){
+                        map.put(cols[8],map.get(cols[8])+1);  
+                      }
+                      else{
+                          map.put(cols[8],1);
+                      }
                     dm.addRow(row);
                 }
+                
 //              row[3] = cols[8];
 //                Patient p = new Patient();
 //                p.setPatientFName(cols[0]);
@@ -111,6 +128,7 @@ public class DoctorsView extends javax.swing.JPanel {
         treatPatient = new javax.swing.JButton();
         emailMessage = new javax.swing.JTextField();
         sendEmail = new javax.swing.JButton();
+        chartPane = new javax.swing.JPanel();
 
         jColorChooser1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -166,6 +184,19 @@ public class DoctorsView extends javax.swing.JPanel {
             }
         });
 
+        chartPane.setBackground(new java.awt.Color(0, 153, 153));
+
+        javax.swing.GroupLayout chartPaneLayout = new javax.swing.GroupLayout(chartPane);
+        chartPane.setLayout(chartPaneLayout);
+        chartPaneLayout.setHorizontalGroup(
+            chartPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+        chartPaneLayout.setVerticalGroup(
+            chartPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 376, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +208,7 @@ public class DoctorsView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backjButton)
                         .addGap(18, 18, 18)
@@ -194,7 +225,12 @@ public class DoctorsView extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(190, 190, 190)
                         .addComponent(sendEmail)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(526, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(584, 584, 584)
+                    .addComponent(chartPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(34, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +248,12 @@ public class DoctorsView extends javax.swing.JPanel {
                 .addComponent(emailMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sendEmail)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(201, 201, 201)
+                    .addComponent(chartPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(17, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -223,7 +264,27 @@ public class DoctorsView extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_backjButtonActionPerformed
 
-    private void updateStatus(String status,String username){
+    private void visualizeHospitalization(java.awt.event.ActionEvent evt) {
+        System.out.println(map);
+        // TODO add your handling code here:
+        DefaultPieDataset pieDataSet= new DefaultPieDataset();
+        for (String name :map.keySet()) {
+            pieDataSet.setValue(name, map.get(name));
+        }
+        JFreeChart chart=ChartFactory.createPieChart("Pie Chart for Hospital Pateint Status", pieDataSet, true, true, true);
+
+        PiePlot p=(PiePlot) chart.getPlot();
+        p.setSectionPaint("Treatment Completed", Color.BLUE);
+        p.setSectionPaint("Admitted", Color.MAGENTA);
+        p.setSectionPaint("Doctor Assigned", Color.red);
+        ChartPanel chartPanel = new ChartPanel(chart, false);
+        chartPane.add(chartPanel);
+        chartPanel.setSize(350,350);
+        chartPanel.setVisible(true);
+
+    }                                               
+
+    private void updateStatus(String status,String username,java.awt.event.ActionEvent evt){
         System.out.println(status);
         File inputFile = new File("src/assests/patientRecord.csv");
         BufferedReader br;
@@ -268,6 +329,7 @@ public class DoctorsView extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        visualizeHospitalization(evt);
     }    
     private void assignPatientToMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignPatientToMeActionPerformed
         int selectedRow = patientsTable.getSelectedRow();
@@ -286,7 +348,7 @@ public class DoctorsView extends javax.swing.JPanel {
                     if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
                         if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
                             cols[8] = "Doctor Assigned";
-                            updateStatus("Doctor Assigned", (String) patientsTable.getValueAt(selectedRow, 1));
+                            updateStatus("Doctor Assigned", (String) patientsTable.getValueAt(selectedRow, 1),evt);
                             patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
                         } else {
                             JOptionPane.showMessageDialog(null, "Patient has already been assigned to a doctor");
@@ -321,7 +383,7 @@ public class DoctorsView extends javax.swing.JPanel {
                     if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
                         if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
                             cols[8] = "Treatment Completed";
-                            updateStatus("Treatment Completed", (String) patientsTable.getValueAt(selectedRow, 1));
+                            updateStatus("Treatment Completed", (String) patientsTable.getValueAt(selectedRow, 1),evt);
                             patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
                             emailPatientReport();
                         } else {
@@ -406,6 +468,7 @@ public class DoctorsView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignPatientToMe;
     private javax.swing.JButton backjButton;
+    private javax.swing.JPanel chartPane;
     private javax.swing.JTextField emailMessage;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabel1;
