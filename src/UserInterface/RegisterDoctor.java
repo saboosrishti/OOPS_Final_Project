@@ -19,6 +19,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -243,6 +245,14 @@ public class RegisterDoctor extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "All fields are required!");
             return;
         }
+        if (!usernamePatternCorrect(doctorEmail)) {
+            JOptionPane.showMessageDialog(null, "User name must be in the format xx_xx@xx.xx");
+            return;
+        }
+        if (!pwdPatternCorrect(doctorPassword)) {
+            JOptionPane.showMessageDialog(null, "Password should be atleast 4 characters long, Should be a conbination of upper, lowercase and special characters");
+            return;
+        }
         /*Start of factory code*/
 //        SpecialityFactory specialityFactory = new SpecialityFactory();
 //        DoctorEmployee doctorEmployee = specialityFactory.getObject(doctorDept);
@@ -298,9 +308,25 @@ public class RegisterDoctor extends javax.swing.JPanel {
         doctorFName.setText("");
         doctorLName.setText("");
         doctorEmail.setText("");
-        populateDoctorComboBox();
-        doctorsPassword.setText("");
         doctorPhone.setText("");
+        doctorsPassword.setText("");
+        populateDoctorComboBox();
+    }
+
+    private boolean usernamePatternCorrect(String username) {
+        Pattern p = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
+        Matcher m = p.matcher(username);
+        boolean b = m.matches();
+        return b;
+
+    }
+
+    private boolean pwdPatternCorrect(String password) {
+        Pattern p = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{4,}$");
+        Matcher m = p.matcher(password);
+        boolean b = m.matches();
+        return b;
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
