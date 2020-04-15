@@ -44,6 +44,7 @@ public class HospitalAdministrator extends javax.swing.JPanel {
         registerDoctor = new javax.swing.JButton();
         registerPatient = new javax.swing.JButton();
         viewPatients = new javax.swing.JButton();
+        viewPatients1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -71,6 +72,13 @@ public class HospitalAdministrator extends javax.swing.JPanel {
             }
         });
 
+        viewPatients1.setText("View Doctors");
+        viewPatients1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewPatients1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,7 +94,8 @@ public class HospitalAdministrator extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(registerPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(registerDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(viewPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(viewPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(viewPatients1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -98,9 +107,11 @@ public class HospitalAdministrator extends javax.swing.JPanel {
                 .addComponent(registerPatient)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registerDoctor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(7, 7, 7)
                 .addComponent(viewPatients)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewPatients1)
+                .addContainerGap(185, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -126,11 +137,19 @@ public class HospitalAdministrator extends javax.swing.JPanel {
         cardLayout.next(container);
     }//GEN-LAST:event_viewPatientsActionPerformed
 
+    private void viewPatients1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPatients1ActionPerformed
+        ViewDoctors viewDoctors = new ViewDoctors(container);
+        container.add("ViewDoctors", viewDoctors);
+        CardLayout cardLayout = (CardLayout) container.getLayout();
+        cardLayout.next(container);
+    }//GEN-LAST:event_viewPatients1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton registerDoctor;
     private javax.swing.JButton registerPatient;
     private javax.swing.JButton viewPatients;
+    private javax.swing.JButton viewPatients1;
     // End of variables declaration//GEN-END:variables
 }

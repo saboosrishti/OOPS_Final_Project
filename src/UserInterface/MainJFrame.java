@@ -9,7 +9,14 @@ import Business.DoctorEmployee;
 import Business.Employee;
 import Business.EmployeeDirectory;
 import Business.HospitalAdminSingleton;
+import Business.SpecialityFactory;
 import java.awt.CardLayout;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -196,16 +203,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         String userName = userNameJTextField.getText();
         String passWord = passwordField.getText();
-        Employee employeeObject = employeeDirectory.ValidateEmployeeLogin(userName, passWord);
-        if (employeeObject == null) {
-            try {
-                JOptionPane.showMessageDialog(null, "Invalid Username or Password");
-            } catch (Exception e) {
-                System.out.println("UserInterface.MainJFrame.loginJButtonActionPerformed()");
-            }
-        } else if ("Admin".equals(employeeObject.getEmployeeDepartment())) {
+        if (employeeDirectory.ValidateEmployeeLogin(userName, passWord)) {
             // JOptionPane.showMessageDialog(null, "Login Successful");
-
             HospitalAdministrator hospitalAdministrator = new HospitalAdministrator(container, employeeDirectory);
             container.add("HospitalAdministrator", hospitalAdministrator);
             passwordField.disable();
@@ -213,13 +212,19 @@ public class MainJFrame extends javax.swing.JFrame {
             loginJButton.setEnabled(false);
             logoutJButton.setEnabled(true);
 
-        } else if (employeeObject instanceof DoctorEmployee) {
-            DoctorsView doctorsView = new DoctorsView(container, employeeObject);
-            container.add("DoctorsView", doctorsView);
-            passwordField.disable();
-            userNameJTextField.disable();
-            loginJButton.setEnabled(false);
-            logoutJButton.setEnabled(true);
+        } else {
+            DoctorEmployee doctorEmployee = verifyDoctorsLogin(userName, passWord);
+            if (doctorEmployee != null) {
+                DoctorsView doctorsView = new DoctorsView(container, doctorEmployee);
+                container.add("DoctorsView", doctorsView);
+                passwordField.disable();
+                userNameJTextField.disable();
+                loginJButton.setEnabled(false);
+                logoutJButton.setEnabled(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Invalid username or password");
+            }
         }
         CardLayout cardLayout = (CardLayout) container.getLayout();
         cardLayout.next(container);
@@ -245,6 +250,33 @@ public class MainJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
+    private DoctorEmployee verifyDoctorsLogin(String userName, String password) {
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader("src/assests/doctorRecord.csv"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] cols = line.split(",");
+                if (userName.equalsIgnoreCase(cols[2]) && password.equals(cols[3])) {
+                    SpecialityFactory specialityFactory = new SpecialityFactory();
+                    DoctorEmployee doctorEmployee = specialityFactory.getObject(cols[5]);
+                    doctorEmployee.setFirstName(cols[0]);
+                    doctorEmployee.setLastName(cols[1]);
+                    doctorEmployee.getUserAccount().setUserName(cols[2]);
+                    doctorEmployee.getUserAccount().setUserPassword(cols[3]);
+                    doctorEmployee.setPhoneNumber(cols[4]);
+                    return doctorEmployee;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -259,16 +291,24 @@ public class MainJFrame extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainJFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainJFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainJFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainJFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

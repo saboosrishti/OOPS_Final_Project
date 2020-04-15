@@ -1,3 +1,0 @@
-userinterface.HospitalAdmin.HospitalAdministrator$1
-userinterface.HospitalAdmin.HospitalAdministrator
-userinterface.HospitalAdmin.HospitalAdministrator$2
