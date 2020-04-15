@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/UserInterface/DoctorsView.java</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/UserInterface/DoctorRegistrationForm.java</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/assests/patientRecord.csv</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/UserInterface/PatientRegistrationForm.java</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/assests/doctorRecord.csv</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/Business/Orthologist.java</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/Business/Patient.java</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/UserInterface/HospitalPatientList.java</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/UserInterface/MainJFrame.java</file>
-            <file>file:/D:/AED%20Assignments/Srishtis%20Change/OOPS_Final_Project-master/src/UserInterface/HospitalAdministrator.java</file>
+            <file>file:/C:/Users/Srishti/OOPS_Final_Project/src/UserInterface/DoctorsView.java</file>
+            <file>file:/C:/Users/Srishti/OOPS_Final_Project/src/UserInterface/HospitalAdministrator.java</file>
+            <file>file:/C:/Users/Srishti/OOPS_Final_Project/src/assests/patientRecord.csv</file>
+            <file>file:/C:/Users/Srishti/OOPS_Final_Project/src/assests/doctorRecord.csv</file>
+            <file>file:/C:/Users/Srishti/OOPS_Final_Project/src/UserInterface/MainJFrame.java</file>
+            <file>file:/C:/Users/Srishti/OOPS_Final_Project/src/UserInterface/PatientRegistrationForm.java</file>
         </group>
     </open-files>
 </project-private>
