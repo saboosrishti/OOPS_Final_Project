@@ -47,7 +47,6 @@ public class DoctorsView extends javax.swing.JPanel {
     }
 
     public void populateData() {
-        List<Patient> list = new ArrayList<>();
         DefaultTableModel dm = (DefaultTableModel) patientsTable.getModel();
         dm.setRowCount(0);
         BufferedReader br;
@@ -66,14 +65,6 @@ public class DoctorsView extends javax.swing.JPanel {
                     row[3] = cols[8];
                     dm.addRow(row);
                 }
-//              row[3] = cols[8];
-//                Patient p = new Patient();
-//                p.setPatientFName(cols[0]);
-//                p.setPatientLName(cols[1]);
-//                p.setDob(cols[4]);
-//                p.setGender(cols[5]);
-//                p.setStatus(cols[8]);
-//                list.add(p);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -269,9 +260,8 @@ public class DoctorsView extends javax.swing.JPanel {
                     String[] cols = line.split(",");
                     if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
                         if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
-                            cols[8] = "Doctor Assigned";
                             updateStatus("Doctor Assigned", (String) patientsTable.getValueAt(selectedRow, 1));
-                            patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
+                            patientsTable.setValueAt("Doctor Assigned", selectedRow, selectedColumn);
                         } else {
                             JOptionPane.showMessageDialog(null, "Patient has already been assigned to a doctor");
                         }
@@ -304,9 +294,8 @@ public class DoctorsView extends javax.swing.JPanel {
                     System.out.println(cols[2]);
                     if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
                         if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
-                            cols[8] = "Treatment Completed";
                             updateStatus("Treatment Completed", (String) patientsTable.getValueAt(selectedRow, 1));
-                            patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
+                            patientsTable.setValueAt("Treatment Completed", selectedRow, selectedColumn);
                             emailPatientReport();
                         } else {
                             JOptionPane.showMessageDialog(null, "Patient treatment has been completed");
