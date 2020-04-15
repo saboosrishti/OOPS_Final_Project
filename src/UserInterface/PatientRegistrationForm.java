@@ -45,7 +45,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
             "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001",
             "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011",
             "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"};
-        
+
         yearComboBox.addItem("1991");
         yearComboBox.addItem("1992");
         yearComboBox.addItem("1993");
@@ -379,6 +379,10 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Patient with " + email + " already exist");
             return;
         }
+        if (!usernamePatternCorrect(email)) {
+            JOptionPane.showMessageDialog(null, "User name must be in the format xxxx@xx.xx");
+            return;
+        }
         String insurance = insuranceNo.getText();
         String phone = customerPhoneTextField.getText();
         String department = (String) medicalDepartment.getSelectedItem();
@@ -396,7 +400,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         try {
             fos = new FileOutputStream("src/assests/patientRecord.csv", true);
             PrintWriter pw = new PrintWriter(fos);
-            pw.append(patientFName + "," + patientLName + "," + email + "," + insurance + "," + dob + "," + gender + "," + phone + "," + department+","+patientStatus);
+            pw.append(patientFName + "," + patientLName + "," + email + "," + insurance + "," + dob + "," + gender + "," + phone + "," + department + "," + patientStatus);
             pw.println();
             pw.close();
         } catch (FileNotFoundException ex) {
@@ -442,10 +446,14 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         if (femaleRadioBtn.isSelected()) {
             femaleRadioBtn.disable();
         }
-
-        // TODO add your handling code here:
     }//GEN-LAST:event_maleRadioButtonActionPerformed
+    private boolean usernamePatternCorrect(String username) {
+        Pattern p = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
+        Matcher m = p.matcher(username);
+        boolean b = m.matches();
+        return b;
 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backjButton;
