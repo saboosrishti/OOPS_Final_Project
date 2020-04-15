@@ -4,14 +4,17 @@
  * and open the template in the editor.
  */
 package UserInterface;
-
 import Business.Employee;
 import Business.Patient;
 import java.awt.CardLayout;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,6 +57,7 @@ public class DoctorsView extends javax.swing.JPanel {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] cols = line.split(",");
+                System.out.println(cols[7]);
                 if (cols[7].equals(employeeObject.getEmployeeDepartment())) {
                     Object[] row = new Object[7];
                     row[0] = cols[0] + " " + cols[1];
@@ -203,6 +207,52 @@ public class DoctorsView extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_backjButtonActionPerformed
 
+    private void updateStatus(String status,String username){
+        System.out.println(status);
+        File inputFile = new File("src/assests/patientRecord.csv");
+        BufferedReader br;
+        FileOutputStream fos;
+        List<String> csvContent = new ArrayList<>();
+        try {
+            br = new BufferedReader(new FileReader("src/assests/patientRecord.csv"));
+            String line;
+            String prevValue = "";
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] cols = line.split(",");
+                if(cols[2].equals(username)){
+                     csvContent.add(cols[0]+","+cols[1]+","+cols[2]+","+cols[3]+","+cols[4]+","+cols[5]+","+cols[6]+","+cols[7]+","+status); 
+                }
+                else{
+                    csvContent.add(cols[0]+","+cols[1]+","+cols[2]+","+cols[3]+","+cols[4]+","+cols[5]+","+cols[6]+","+cols[7]+","+cols[8]);
+                }
+               
+//                fos = new FileOutputStream("src/assests/patientRecord.csv", true);
+//                PrintWriter pw = new PrintWriter(fos);
+//                for(int i=0;i<csvContent.size();i++){
+//                    pw.append(csvContent.get(i));
+//                }
+//                pw.println();
+//                pw.close();
+            }
+            System.out.println(csvContent);
+            FileWriter fw = new FileWriter("src/assests/patientRecord.csv",false);
+            fos = new FileOutputStream("src/assests/patientRecord.csv", true);
+            PrintWriter pw = new PrintWriter(fos);
+            for(int i=0;i<csvContent.size();i++){
+                pw.append(csvContent.get(i));
+                if(i<csvContent.size()-1){
+                    pw.println();
+                }
+            }
+            pw.println();
+            pw.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }    
     private void assignPatientToMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignPatientToMeActionPerformed
         int selectedRow = patientsTable.getSelectedRow();
         int selectedColumn = 3;
@@ -220,6 +270,7 @@ public class DoctorsView extends javax.swing.JPanel {
                     if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
                         if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
                             cols[8] = "Doctor Assigned";
+                            updateStatus("Doctor Assigned", (String) patientsTable.getValueAt(selectedRow, 1));
                             patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
                         } else {
                             JOptionPane.showMessageDialog(null, "Patient has already been assigned to a doctor");
@@ -250,9 +301,11 @@ public class DoctorsView extends javax.swing.JPanel {
                 while ((line = br.readLine()) != null) {
                     // use comma as separator
                     String[] cols = line.split(",");
+                    System.out.println(cols[2]);
                     if (cols[2].equalsIgnoreCase((String) patientsTable.getValueAt(selectedRow, 1))) {
                         if (cols[8] != patientsTable.getValueAt(selectedRow, 3)) {
                             cols[8] = "Treatment Completed";
+                            updateStatus("Treatment Completed", (String) patientsTable.getValueAt(selectedRow, 1));
                             patientsTable.setValueAt(cols[8], selectedRow, selectedColumn);
                             emailPatientReport();
                         } else {
