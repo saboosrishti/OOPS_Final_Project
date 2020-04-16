@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="test/|test/|test/" kind="src" path="src"/>
+	<classpathentry excluding="src/|test/|src/test/|src/test/|src/test/" kind="src" path=""/>
+	<classpathentry kind="src" path="src/test"/>
+	<classpathentry exported="true" kind="lib" path="javax.mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="jcommon-1.0.23.jar"/>
+	<classpathentry exported="true" kind="lib" path="jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry exported="true" kind="lib" path="jfreechart-1.0.19-swt.jar"/>
+	<classpathentry exported="true" kind="lib" path="jfreechart-1.0.19.jar"/>
+	<classpathentry exported="true" kind="lib" path="jfreesvg-2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Vikas/Documents/CSYE OOPS Concepts/final project/Final/OOPS_Final_Project/javax.mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Vikas/Documents/CSYE OOPS Concepts/final project/Final/OOPS_Final_Project/jcommon-1.0.23.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Vikas/Documents/CSYE OOPS Concepts/final project/Final/OOPS_Final_Project/jfreechart-1.0.19.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Vikas/Documents/CSYE OOPS Concepts/final project/Final/OOPS_Final_Project/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Vikas/Documents/CSYE OOPS Concepts/final project/Final/OOPS_Final_Project/jfreechart-1.0.19-swt.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Vikas/Documents/CSYE OOPS Concepts/final project/Final/OOPS_Final_Project/jfreesvg-2.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

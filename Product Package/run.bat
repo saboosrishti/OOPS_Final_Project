@@ -1,0 +1,2 @@
+cd jars 
+help.jar
