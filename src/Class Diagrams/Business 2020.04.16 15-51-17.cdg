@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Business">
+  <ClassDiagramComponents>
+    <Class name="Cardiologist" package="Business" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="doctorDepartment"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="speciality" returnType="void" visibility="package"/>
+      </Methods>
+    </Class>
+    <Class name="DoctorEmployee" package="Business" visibility="public" isAbstract="true" xPosition="620.0" yPosition="11.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="doctorsDepartment"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="speciality" returnType="void" visibility="package" isAbstract="true"/>
+      </Methods>
+    </Class>
+    <Class name="Employee" package="Business" visibility="public" xPosition="961.0" yPosition="11.0">
+      <Fields>
+        <Field name="employeeID" type="String" visibility="package"/>
+        <Field name="employeeDepartment" type="String" visibility="package"/>
+        <Field name="userAccount" type="UserAccount" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="userName"/>
+          <Argument type="String" name="password"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="employeeDepartment"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getUserAccount" returnType="UserAccount" visibility="public"/>
+        <Method name="setUserAccount" returnType="void" visibility="public">
+          <Argument type="UserAccount" name="userAccount"/>
+        </Method>
+        <Method name="getEmployeeID" returnType="String" visibility="public"/>
+        <Method name="setEmployeeID" returnType="void" visibility="public">
+          <Argument type="String" name="employeeID"/>
+        </Method>
+        <Method name="getEmployeeDepartment" returnType="String" visibility="public"/>
+        <Method name="setEmployeeDepartment" returnType="void" visibility="public">
+          <Argument type="String" name="employeeDepartment"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="EmployeeDirectory" package="Business" visibility="public" xPosition="1409.0" yPosition="20.0">
+      <Fields>
+        <Field name="employeeList" type="ArrayList&lt;Employee&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getEmployeeList" returnType="ArrayList&lt;Employee&gt;" visibility="public"/>
+        <Method name="AddEmployeeToDirectory" returnType="void" visibility="public">
+          <Argument type="Employee" name="employee"/>
+        </Method>
+        <Method name="ValidateEmployeeLogin" returnType="boolean" visibility="public">
+          <Argument type="String" name="userName"/>
+          <Argument type="String" name="Password"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="HospitalAdminEmployee" package="Business" visibility="public" xPosition="1451.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="HospitalAdminSingleton" package="Business" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="hospitalAdminInstance" type="Employee" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstance" returnType="Employee" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+    <Class name="HospitalDirectory" package="Business" visibility="public" xPosition="1543.0" yPosition="655.0">
+      <Fields>
+        <Field name="hospitalDirectory" type="List&lt;Person&gt;" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="UpdateHospitalDirectory" returnType="void" visibility="public">
+          <Argument type="Person" name="personObject"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Neurologist" package="Business" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="doctorDepartment"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="speciality" returnType="void" visibility="package"/>
+      </Methods>
+    </Class>
+    <Class name="Orthologist" package="Business" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="doctorDepartment"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="speciality" returnType="void" visibility="package"/>
+      </Methods>
+    </Class>
+    <Class name="Patient" package="Business" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="patientFName" type="String" visibility="package"/>
+        <Field name="patientLName" type="String" visibility="package"/>
+        <Field name="email" type="String" visibility="package"/>
+        <Field name="insurance" type="String" visibility="package"/>
+        <Field name="dob" type="String" visibility="package"/>
+        <Field name="gender" type="String" visibility="package"/>
+        <Field name="phone" type="String" visibility="package"/>
+        <Field name="department" type="String" visibility="package"/>
+        <Field name="status" type="String" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="patientFName"/>
+          <Argument type="String" name="patientLName"/>
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="insurance"/>
+          <Argument type="String" name="dob"/>
+          <Argument type="String" name="gender"/>
+          <Argument type="String" name="phone"/>
+          <Argument type="String" name="department"/>
+          <Argument type="String" name="status"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getStatus" returnType="String" visibility="public"/>
+        <Method name="setStatus" returnType="void" visibility="public">
+          <Argument type="String" name="status"/>
+        </Method>
+        <Method name="getPatientFName" returnType="String" visibility="public"/>
+        <Method name="setPatientFName" returnType="void" visibility="public">
+          <Argument type="String" name="patientFName"/>
+        </Method>
+        <Method name="getPatientLName" returnType="String" visibility="public"/>
+        <Method name="setPatientLName" returnType="void" visibility="public">
+          <Argument type="String" name="patientLName"/>
+        </Method>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+        </Method>
+        <Method name="getInsurance" returnType="String" visibility="public"/>
+        <Method name="setInsurance" returnType="void" visibility="public">
+          <Argument type="String" name="insurance"/>
+        </Method>
+        <Method name="getDob" returnType="String" visibility="public"/>
+        <Method name="setDob" returnType="void" visibility="public">
+          <Argument type="String" name="dob"/>
+        </Method>
+        <Method name="getGender" returnType="String" visibility="public"/>
+        <Method name="setGender" returnType="void" visibility="public">
+          <Argument type="String" name="gender"/>
+        </Method>
+        <Method name="getPhone" returnType="String" visibility="public"/>
+        <Method name="setPhone" returnType="void" visibility="public">
+          <Argument type="String" name="phone"/>
+        </Method>
+        <Method name="getDepartment" returnType="String" visibility="public"/>
+        <Method name="setDepartment" returnType="void" visibility="public">
+          <Argument type="String" name="department"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Pediatrician" package="Business" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="doctorDepartment"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="speciality" returnType="void" visibility="package"/>
+      </Methods>
+    </Class>
+    <Class name="Person" package="Business" visibility="public" isAbstract="true" xPosition="1220.0" yPosition="420.0">
+      <Fields>
+        <Field name="firstName" type="String" visibility="private"/>
+        <Field name="lastName" type="String" visibility="private"/>
+        <Field name="dateOfBirth" type="String" visibility="private"/>
+        <Field name="phoneNumber" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getFirstName" returnType="String" visibility="public"/>
+        <Method name="setFirstName" returnType="void" visibility="public">
+          <Argument type="String" name="firstName"/>
+        </Method>
+        <Method name="getLastName" returnType="String" visibility="public"/>
+        <Method name="setLastName" returnType="void" visibility="public">
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="getDateOfBirth" returnType="String" visibility="public"/>
+        <Method name="setDateOfBirth" returnType="void" visibility="public">
+          <Argument type="String" name="dateOfBirth"/>
+        </Method>
+        <Method name="getPhoneNumber" returnType="String" visibility="public"/>
+        <Method name="setPhoneNumber" returnType="void" visibility="public">
+          <Argument type="String" name="phoneNumber"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SpecialityFactory" package="Business" visibility="public" xPosition="1497.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getObject" returnType="DoctorEmployee" visibility="public">
+          <Argument type="String" name="doctorDepartment"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="UserAccount" package="Business" visibility="public" xPosition="1722.0" yPosition="173.0">
+      <Fields>
+        <Field name="userName" type="String" visibility="private"/>
+        <Field name="userPassword" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="String" name="userName"/>
+          <Argument type="String" name="userPassword"/>
+        </Constructor>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods>
+        <Method name="getUserName" returnType="String" visibility="public"/>
+        <Method name="setUserName" returnType="void" visibility="public">
+          <Argument type="String" name="userName"/>
+        </Method>
+        <Method name="getUserPassword" returnType="String" visibility="public"/>
+        <Method name="setUserPassword" returnType="void" visibility="public">
+          <Argument type="String" name="userPassword"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="AbstractDoctorFactory" package="Business" visibility="public" xPosition="-2.0" yPosition="160.0">
+      <Methods>
+        <Method name="getObject" returnType="DoctorEmployee" visibility="public">
+          <Argument type="String" name="doctorDepartment"/>
+        </Method>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="hospitalDirectory" source="Business.HospitalDirectory" target="Business.Person" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Person&gt;"/>
+    <IsRelation name="is" source="Business.Neurologist" target="Business.DoctorEmployee"/>
+    <UseRelation source="Business.EmployeeDirectory" target="Business.Employee" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Business.HospitalAdminEmployee" target="Business.Employee"/>
+    <IsRelation name="is" source="Business.Pediatrician" target="Business.DoctorEmployee"/>
+    <UseRelation source="Business.AbstractDoctorFactory" target="Business.Employee" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="userAccount" source="Business.Employee" target="Business.UserAccount" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="hospitalAdminInstance" source="Business.HospitalAdminSingleton" target="Business.Employee" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Business.HospitalDirectory" target="Business.Person" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Business.Cardiologist" target="Business.DoctorEmployee"/>
+    <UseRelation source="Business.HospitalAdminSingleton" target="Business.Employee" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Business.DoctorEmployee" target="Business.Employee"/>
+    <IsRelation name="is" source="Business.Orthologist" target="Business.DoctorEmployee"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Business.SpecialityFactory" target="Business.AbstractDoctorFactory"/>
+    <IsRelation name="is" source="Business.Employee" target="Business.Person"/>
+    <HasRelation name="employeeList" source="Business.EmployeeDirectory" target="Business.Employee" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Employee&gt;"/>
+    <UseRelation source="Business.SpecialityFactory" target="Business.Employee" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Business.Employee" target="Business.UserAccount" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
