@@ -448,7 +448,7 @@ public class PatientRegistrationForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_maleRadioButtonActionPerformed
     private boolean usernamePatternCorrect(String username) {
-        Pattern p = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
+        Pattern p = Pattern.compile("^[a-zA-Z0-9]+[.]?[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+[.]?[a-zA-Z0-9]+$");
         Matcher m = p.matcher(username);
         boolean b = m.matches();
         return b;
