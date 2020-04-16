@@ -45,7 +45,7 @@ public class ViewDoctors extends javax.swing.JPanel {
                 String[] cols = line.split(",");
                 listOfDoctors.add(cols[0] + "," + cols[1] + "," + cols[2]+","+cols[5]);
             }
-            sortTable(listOfDoctors.stream().sorted().collect(Collectors.toList()));
+            sortTable(listOfDoctors.stream().sorted(String.CASE_INSENSITIVE_ORDER).collect(Collectors.toList()));
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PatientRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,6 +55,7 @@ public class ViewDoctors extends javax.swing.JPanel {
     }
 
     private void sortTable(List<String> listOfDoctors) {
+        System.out.println(listOfDoctors);
          DefaultTableModel dm = (DefaultTableModel) doctorJTable.getModel();
         dm.setRowCount(0);
         enableSorter(dm);
